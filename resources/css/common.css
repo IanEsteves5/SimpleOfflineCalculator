@@ -1,0 +1,45 @@
+* {
+    font-family:"Courier New", Courier, monospace;
+    font-size:20px;
+}
+
+*:focus {
+    outline:0;
+}
+
+h1 {
+    font-size:30px;
+}
+
+h2 {
+    font-size:26px;
+}
+
+h3 {
+    font-size:22px;
+}
+
+table, tr, td, th {
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+
+input, textarea {
+    border:1px solid black;
+    border-radius:10px;
+    padding:10px;
+}
+
+::-webkit-scrollbar {
+    width:10px;
+    height:10px;
+}
+
+::-webkit-scrollbar-track , ::-webkit-scrollbar-corner, ::-webkit-resizer {
+    background:none;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background:lightgray;
+    border-radius:5px;
+}

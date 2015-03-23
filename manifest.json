@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+
+    "name": "Simple Offline Calculator",
+    "description": "Math happens.",
+    "version": "0.1",
+    "author": "Ian Esteves do Nascimento",
+
+    "icons": {
+        "16": "resources/image/icon_16.png",
+        "48": "resources/image/icon_48.png",
+        "128": "resources/image/icon_128.png"
+    },
+
+    "browser_action": {
+        "default_icon": {
+            "19": "resources/image/icon_19.png",
+            "38": "resources/image/icon_38.png"
+        },
+        "default_popup": "popup.html",
+        "default_title": "Simple Offline Calculator"
+    }
+}

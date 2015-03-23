@@ -1,0 +1,13 @@
+@import url(common.css);
+
+div.parseTree {
+    border:1px solid black;
+    border-bottom:none;
+    border-radius:10px;
+    display:inline-block;
+    text-align:center;
+    vertical-align:bottom;
+    margin:0px;
+    padding:5px;
+    padding-bottom: 0px;
+}
