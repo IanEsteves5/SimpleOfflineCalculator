@@ -19,10 +19,14 @@ var tokenTypes = [ // Terminal symbols
     //new tokenType(",",     ","),
     //new tokenType(":",     ":"),
     //new tokenType("\\?",     "?"),
-    new tokenType("error", ".*")
+    new tokenType("err", ".*")
 ];
 
 var rules = [ // Non terminal symbols. Patterns are evaluated right to left
+    new rule("INPUT", [
+        new pattern(["EXPR"],                   function(nodes) {return nodes[0].val();}),
+        new pattern(["ERROR"],                  function(nodes) {pushErrorLog("ERROR"); return nodes[0].val();})
+    ]),
     new rule("EXPR", [
         new pattern(["EXPR", "+", "EXPR2_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
         new pattern(["EXPR", "-", "EXPR2_R+"],  function(nodes) {return nodes[0].val() - nodes[2].val();}),
@@ -62,8 +66,13 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     new rule("NUM", [
         new pattern(["int"],                    function(nodes) {return parseInt(nodes[0].val());}),
         new pattern(["real"],                   function(nodes) {return parseFloat(nodes[0].val());})
+    ]),
+    new rule("ERROR", [
+        new pattern([],                         function(nodes) {return null;})
     ])
 ];
+
+var errorLog = "";
 
 // Functions
 
@@ -84,10 +93,16 @@ function getTokens(str) {
 };
 
 function getParseTree(tokens) {
-    var parseTree = rules[0].getParseTree(tokens, 0);
-    if(parseTree !== null && parseTree.tokensUsed() < tokens.length)
-        return null;
-    return parseTree;
+    return rules[0].getParseTree(tokens, 0, true);
+};
+
+function calculate(str) {
+    errorLog = "";
+    return getParseTree(getTokens(str)).val();
+};
+
+function pushErrorLog(str) {
+    errorLog += (errorLog === "" ? "" : "\n") + str;
 };
 
 // Types
@@ -107,9 +122,9 @@ function token(id, pos, content) {
 function rule(id, patterns) {
     this.id = id;
     this.patterns = patterns;
-    this.getParseTree = function(tokens, tokensUsed) {
-        for(var i = 0 ; i < patterns.length ; i++) {
-            var parseTree = patterns[i].getParseTree(tokens, tokensUsed);
+    this.getParseTree = function(tokens, tokensUsed, isLast) { // isLast records weather the rule is
+        for(var i = 0 ; i < patterns.length ; i++) {           // in the beginning of the expression
+            var parseTree = patterns[i].getParseTree(tokens, tokensUsed, isLast);
             if(parseTree !== null) {
                 parseTree.id = id;
                 return parseTree;
@@ -122,22 +137,28 @@ function rule(id, patterns) {
 function pattern(elements, action) {
     this.elements = elements;
     this.getPatternString = function() {
-        return "[" + elements.join(" ") + "]";
+        return "[" + this.elements.join(" ") + "]";
     };
-    this.getParseTree = function(tokens, tokensUsed) {
+    this.getParseTree = function(tokens, tokensUsed, isLast) {
         var children = [];
         var remainingTokens = tokens.length - tokensUsed;
-        var remainingElements = elements.length;
+        var remainingElements = this.elements.length;
+        
+        if(remainingElements === 0) { // Empty pattern accepts everything
+            for(var i = 0 ; i < remainingTokens ; i++)
+                children.push(new parseTreeTerminalNode(tokens[i]));
+            return new parseTreeNode(children, action);
+        }
         
         while(remainingTokens > 0 && remainingElements > 0) { // Evaluates each element right to left
             remainingElements--;
             var node = null;
             
-            if(elements[remainingElements] === tokens[remainingTokens-1].id) // Checks if current element is terminal
+            if(this.elements[remainingElements] === tokens[remainingTokens-1].id) // Checks if current element is terminal
                 node = new parseTreeTerminalNode(tokens[remainingTokens-1]);
-            else for(var j = 0 ; j < rules.length ; j++) { // Checks if current element is non terminal
-                if(elements[remainingElements] === rules[j].id) {
-                    node = rules[j].getParseTree(tokens, tokens.length - remainingTokens);
+            else for(var i = 0 ; i < rules.length ; i++) { // Checks if current element is non terminal
+                if(this.elements[remainingElements] === rules[i].id) {
+                    node = rules[i].getParseTree(tokens, tokens.length - remainingTokens, isLast && remainingElements === 0);
                     break;
                 }
             }
@@ -147,9 +168,27 @@ function pattern(elements, action) {
             }
             children.unshift(node); // Element found
             remainingTokens -= node.tokensUsed();
-            node = null;
         }
+        
+        if(isLast && remainingTokens === 0) { // Checks if pattern can be reduced to nothing
+            while(remainingElements > 0) {
+                remainingElements--;
+                var node = null;
+                for(var i = 0 ; i < rules.length ; i++) {
+                    if(this.elements[remainingElements] === rules[i].id) {
+                        node = rules[i].getParseTree(tokens, tokens.length - remainingTokens, isLast && remainingElements === 0);
+                        break;
+                    }
+                }
+                if(node === null)
+                    return null;
+                children.unshift(node);
+            }
+        }
+        
         if(remainingElements > 0)
+            return null;
+        if(isLast && remainingTokens > 0)
             return null;
         return new parseTreeNode(children, action);
     };

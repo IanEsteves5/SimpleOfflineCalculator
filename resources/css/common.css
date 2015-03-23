@@ -24,7 +24,8 @@ table, tr, td, th {
     border-collapse:collapse;
 }
 
-input, textarea {
+input, textarea, textarea:disabled {
+    background-color:white;
     border:1px solid black;
     border-radius:10px;
     padding:10px;
@@ -41,5 +42,5 @@ input, textarea {
  
 ::-webkit-scrollbar-thumb {
     background:lightgray;
-    border-radius:5px;
+    border-radius:10px;
 }

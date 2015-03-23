@@ -34,6 +34,7 @@ window.onload = function() {
         var inputString = document.getElementById("inputString").value;
         var tokens = getTokens(inputString);
         var parseTree = getParseTree(tokens);
+        var result = parseTree.val();
         
         var content = "<tr><th>id</th><th>pos</th><th>content</th></tr>";
         for(var i = 0 ; i < tokens.length ; i++) {
@@ -43,6 +44,12 @@ window.onload = function() {
     
         document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);
         
-        document.getElementById("result").innerHTML = parseTree === null ? "null" : parseTree.val();
+        document.getElementById("result").innerHTML = result === null ? "null" : result;
+        
+        errorLog = "";
+        parseTree.val();
+        
+        document.getElementById("errorLog").textContent = errorLog;
+        
     };
 };

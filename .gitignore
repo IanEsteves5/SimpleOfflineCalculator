@@ -19,7 +19,7 @@ nb-configuration.xml
 nbactions.xml
 /nbactions-teste.xml
 nbactions-teste.xml
-nbproject/private/
+nbproject/
 build/
 nbbuild/
 dist/

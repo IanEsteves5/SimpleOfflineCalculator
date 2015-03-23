@@ -9,6 +9,9 @@ var commands = [
         calculatorOutput.textContent = "";
         return "";
     }),
+    new command("log", function() {
+        return errorLog;
+    }),
     new command("tree", function() {
         window.open("tree.html", "Tree");
         return "Opening tree...";
@@ -42,11 +45,8 @@ window.onload = function() {
         if(newOutput === null) {
             if(calculatorInput.value === "")
                 calculatorInput.value = "0";
-            parseTree = getParseTree(getTokens(calculatorInput.value));
-            if(parseTree === null)
-                newOutput = "ERR";
-            else
-                newOutput = parseTree.val() + " = " + calculatorInput.value;
+            result = calculate(calculatorInput.value);
+            newOutput = (result === null ? "ERR" : result) + " = " + calculatorInput.value;
         }
         
         calculatorOutput.textContent = newOutput + (calculatorOutput.textContent === "" ? "" : "\n") + calculatorOutput.textContent;
