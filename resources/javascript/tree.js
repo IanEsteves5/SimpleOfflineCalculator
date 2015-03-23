@@ -1,8 +1,8 @@
 function getParseTreeDiv(parseTree) {
     if(parseTree === null)
-        return "<div class='parseTree'>NULL</div>";
+        return "<div class='parseTreeNode'>NULL</div>";
     else {
-        result = "<div class='parseTree'>";
+        result = "<div class='parseTreeNode'>";
         //result += parseTree.id + "<br />" + parseTree.val() + "<br />";
         var returnedValue = parseTree.val();
         result += parseTree.id + (parseTree.id === returnedValue ? "" : " " + returnedValue) + "<br />";

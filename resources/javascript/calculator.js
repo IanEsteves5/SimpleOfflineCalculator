@@ -1,160 +1,71 @@
+// Global variables
+
 var tokenTypes = [ // Terminal symbols
-    newTokenType("ws",    "\\s+"),
-    newTokenType("(",     "\\("),
-    newTokenType(")",     "\\)"),
-    newTokenType("+",     "\\+"),
-    newTokenType("-",     "-"),
-    newTokenType("*",     "\\*"),
-    newTokenType("/",     "/"),
-    newTokenType("%",     "%"),
-    newTokenType("^",     "\\^"),
-    newTokenType("real",  "\\d*\\.\\d+"),
-    newTokenType("int",   "\\d+"),
-    //newTokenType(",",     ","),
-    //newTokenType("id",    "[a-zA-Z_]\\w*"),
-    newTokenType("error", ".*")
+    new tokenType("ws",    "\\s+"),
+    //new tokenType("id",    "[a-zA-Z_]\\w*"),
+    new tokenType("real",  "\\d*\\.\\d+"),
+    new tokenType("int",   "\\d+"),
+    new tokenType("(",     "\\("),
+    new tokenType(")",     "\\)"),
+    new tokenType("+",     "\\+"),
+    new tokenType("-",     "-"),
+    new tokenType("*",     "\\*"),
+    new tokenType("/",     "/"),
+    new tokenType("%",     "%"),
+    new tokenType("^",     "\\^"),
+    //new tokenType("=",     "="),
+    //new tokenType(">",     ">"),
+    //new tokenType("<",     "<"),
+    //new tokenType(",",     ","),
+    //new tokenType(":",     ":"),
+    //new tokenType("\\?",     "?"),
+    new tokenType("error", ".*")
 ];
 
 var rules = [ // Non terminal symbols. Patterns are evaluated right to left
-    newRule("EXPR", [
-        newPattern(["EXPR", "+", "EXPR2_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
-        newPattern(["EXPR", "-", "EXPR2_R+"],  function(nodes) {return nodes[0].val() - nodes[2].val();}),
-        newPattern(["EXPR", "ws"],             function(nodes) {return nodes[0].val();}),
-        newPattern(["ws", "EXPR2"],            function(nodes) {return nodes[1].val();}),
-        newPattern(["EXPR2"],                  function(nodes) {return nodes[0].val();})
+    new rule("EXPR", [
+        new pattern(["EXPR", "+", "EXPR2_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
+        new pattern(["EXPR", "-", "EXPR2_R+"],  function(nodes) {return nodes[0].val() - nodes[2].val();}),
+        new pattern(["EXPR", "ws"],             function(nodes) {return nodes[0].val();}),
+        new pattern(["ws", "EXPR2"],            function(nodes) {return nodes[1].val();}),
+        new pattern(["EXPR2"],                  function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR2", [
-        newPattern(["EXPR2", "*", "EXPR3"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        newPattern(["EXPR2", "/", "EXPR3"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        newPattern(["EXPR2", "%", "EXPR3"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
-        newPattern(["EXPR3"],                  function(nodes) {return nodes[0].val();})
+    new rule("EXPR2", [
+        new pattern(["EXPR2", "*", "EXPR3"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR2", "/", "EXPR3"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR2", "%", "EXPR3"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR3"],                  function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR2_R+", [
-        newPattern(["EXPR2_R+", "*", "EXPR3"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        newPattern(["EXPR2_R+", "/", "EXPR3"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        newPattern(["EXPR2_R+", "%", "EXPR3"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
-        newPattern(["EXPR3_R+"],               function(nodes) {return nodes[0].val();})
+    new rule("EXPR2_R+", [
+        new pattern(["EXPR2_R+", "*", "EXPR3"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR2_R+", "/", "EXPR3"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR2_R+", "%", "EXPR3"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR3_R+"],               function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR3", [
-        newPattern(["EXPR3", "^", "EXPR4"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
-        newPattern(["EXPR4"],                  function(nodes) {return nodes[0].val();})
+    new rule("EXPR3", [
+        new pattern(["EXPR3", "^", "EXPR4"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR4"],                  function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR3_R+", [
-        newPattern(["EXPR3_R+", "^", "EXPR4"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
-        newPattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
+    new rule("EXPR3_R+", [
+        new pattern(["EXPR3_R+", "^", "EXPR4"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR4", [
-        newPattern(["+", "EXPR5"],             function(nodes) {return nodes[1].val();}),
-        newPattern(["-", "EXPR5"],             function(nodes) {return -nodes[1].val();}),
-        newPattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
+    new rule("EXPR4", [
+        new pattern(["+", "EXPR5"],             function(nodes) {return nodes[1].val();}),
+        new pattern(["-", "EXPR5"],             function(nodes) {return -nodes[1].val();}),
+        new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
     ]),
-    newRule("EXPR5", [
-        newPattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
-        newPattern(["NUM"],                    function(nodes) {return nodes[0].val();})
+    new rule("EXPR5", [
+        new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
+        new pattern(["NUM"],                    function(nodes) {return nodes[0].val();})
     ]),
-    newRule("NUM", [
-        newPattern(["int"],                    function(nodes) {return parseInt(nodes[0].val());}),
-        newPattern(["real"],                   function(nodes) {return parseFloat(nodes[0].val());})
+    new rule("NUM", [
+        new pattern(["int"],                    function(nodes) {return parseInt(nodes[0].val());}),
+        new pattern(["real"],                   function(nodes) {return parseFloat(nodes[0].val());})
     ])
 ];
 
-function newTokenType(id, regexStr) {
-    return {
-        id: id,
-        regexStr: regexStr,
-        regex: new RegExp("^" + regexStr)
-    };
-};
-
-function newToken(id, pos, content) {
-    return {
-        id: id,
-        pos: pos,
-        content: content
-    };
-};
-
-function newRule(id, patterns) {
-    return {
-        id: id,
-        patterns: patterns,
-        getParseTree: function(tokens, tokensUsed) {
-            for(var i = 0 ; i < patterns.length ; i++) {
-                var parseTree = patterns[i].getParseTree(tokens, tokensUsed);
-                if(parseTree !== null) {
-                    parseTree.id = id;
-                    return parseTree;
-                }
-            }
-            return null;
-        }
-    };
-};
-
-function newPattern(elements, action) {
-    return {
-        elements: elements,
-        action: action,
-        getParseTree: function(tokens, tokensUsed) {
-            var children = [];
-            var remainingTokens = tokens.length - tokensUsed;
-            var remainingElements = elements.length;
-            
-            while(remainingTokens > 0 && remainingElements > 0) { // Evaluates each element right to left
-                remainingElements--;
-                var node = null;
-                
-                if(elements[remainingElements] === tokens[remainingTokens-1].id) // Checks if current element is terminal
-                    node = newParseTreeTerminalNode(tokens[remainingTokens-1]);
-                else for(var j = 0 ; j < rules.length ; j++) { // Checks if current element is non terminal
-                    if(elements[remainingElements] === rules[j].id) {
-                        node = rules[j].getParseTree(tokens, tokens.length - remainingTokens);
-                        break;
-                    }
-                }
-                
-                if(node === null) { // Element not found
-                    return null;
-                }
-                children.unshift(node); // Element found
-                remainingTokens -= node.tokensUsed();
-                node = null;
-            }
-            if(remainingElements > 0)
-                return null;
-            return newParseTreeNode(children, action);
-        },
-        getPatternString: function() {
-            return "[" + elements.join(" ") + "]";
-        }
-    };
-}
-
-function newParseTreeNode(children, action) {
-    return {
-        id: "",
-        children: children,
-        action: action,
-        val: function() {return action(children);},
-        tokensUsed: function() {
-            result = 0;
-            for(var i = 0 ; i < children.length ; i++)
-                result += children[i].tokensUsed();
-            return result;
-        }
-    };
-};
-
-function newParseTreeTerminalNode(token) {
-    return {
-        id: token.id,
-        children: [],
-        token: token,
-        action: function(nodes) {return token.content;},
-        val: function() {return token.content;},
-        tokensUsed: function() {return 1;}
-    };
-}
+// Functions
 
 function getTokens(str) {
     var tokens = [];
@@ -164,7 +75,7 @@ function getTokens(str) {
             match = tokenTypes[i].regex.exec(str.substring(pos));
             if(match !== null) {
                 match = match[0];
-                tokens.push(newToken(tokenTypes[i].id, pos, match));
+                tokens.push(new token(tokenTypes[i].id, pos, match));
                 break;
             }
         }
@@ -178,3 +89,87 @@ function getParseTree(tokens) {
         return null;
     return parseTree;
 };
+
+// Types
+
+function tokenType(id, regexStr) {
+    this.id = id;
+    this.regexStr = regexStr;
+    this.regex = new RegExp("^" + regexStr);
+};
+
+function token(id, pos, content) {
+    this.id = id;
+    this.pos = pos;
+    this.content = content;
+};
+
+function rule(id, patterns) {
+    this.id = id;
+    this.patterns = patterns;
+    this.getParseTree = function(tokens, tokensUsed) {
+        for(var i = 0 ; i < patterns.length ; i++) {
+            var parseTree = patterns[i].getParseTree(tokens, tokensUsed);
+            if(parseTree !== null) {
+                parseTree.id = id;
+                return parseTree;
+            }
+        }
+        return null;
+    };
+};
+
+function pattern(elements, action) {
+    this.elements = elements;
+    this.getPatternString = function() {
+        return "[" + elements.join(" ") + "]";
+    };
+    this.getParseTree = function(tokens, tokensUsed) {
+        var children = [];
+        var remainingTokens = tokens.length - tokensUsed;
+        var remainingElements = elements.length;
+        
+        while(remainingTokens > 0 && remainingElements > 0) { // Evaluates each element right to left
+            remainingElements--;
+            var node = null;
+            
+            if(elements[remainingElements] === tokens[remainingTokens-1].id) // Checks if current element is terminal
+                node = new parseTreeTerminalNode(tokens[remainingTokens-1]);
+            else for(var j = 0 ; j < rules.length ; j++) { // Checks if current element is non terminal
+                if(elements[remainingElements] === rules[j].id) {
+                    node = rules[j].getParseTree(tokens, tokens.length - remainingTokens);
+                    break;
+                }
+            }
+            
+            if(node === null) { // Element not found
+                return null;
+            }
+            children.unshift(node); // Element found
+            remainingTokens -= node.tokensUsed();
+            node = null;
+        }
+        if(remainingElements > 0)
+            return null;
+        return new parseTreeNode(children, action);
+    };
+}
+
+function parseTreeNode(children, action) {
+    this.id = "";
+    this.children = children;
+    this.val = function() {return action(children);};
+    this.tokensUsed = function() {
+        result = 0;
+        for(var i = 0 ; i < children.length ; i++)
+            result += children[i].tokensUsed();
+        return result;
+    };
+};
+
+function parseTreeTerminalNode(token) {
+    this.id = token.id;
+    this.children = [];
+    this.val = function() {return token.content;};
+    this.tokensUsed = function() {return 1;};
+}

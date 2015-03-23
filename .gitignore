@@ -1,0 +1,26 @@
+# eclipse conf file
+.settings
+.classpath
+.project
+.manager
+.scala_dependencies
+.cache
+
+# idea conf files
+.idea
+*.iml
+*.ipr
+*.iws
+
+# netbeans conf files
+/nb-configuration.xml
+nb-configuration.xml
+/nbactions.xml
+nbactions.xml
+/nbactions-teste.xml
+nbactions-teste.xml
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/

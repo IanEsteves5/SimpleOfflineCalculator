@@ -5,6 +5,10 @@ var commands = [
             result += "\n" + commands[i].name;
         return result;
     }),
+    new command("clear", function() {
+        calculatorOutput.textContent = "";
+        return "";
+    }),
     new command("tree", function() {
         window.open("tree.html", "Tree");
         return "Opening tree...";
@@ -27,8 +31,6 @@ window.onload = function() {
     calculatorInput.onkeyup = function(event) {
         if(event.keyCode !== 13)
             return;
-        
-        console.log(commands);
             
         var newOutput = null;
         

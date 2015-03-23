@@ -5,6 +5,7 @@
     "description": "Math happens.",
     "version": "0.1",
     "author": "Ian Esteves do Nascimento",
+    "homepage_url": "https://github.com/IanEsteves5/Chrome-Calculator-Extension",
 
     "icons": {
         "16": "resources/image/icon_16.png",
