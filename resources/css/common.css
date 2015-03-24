@@ -7,6 +7,10 @@
     outline:0;
 }
 
+body {
+    background-color: #F0F0F0;
+}
+
 h1 {
     font-size:30px;
 }
@@ -20,13 +24,14 @@ h3 {
 }
 
 table, tr, td, th {
-    border: 1px solid black;
+    background-color:white;
+    border: 1px solid lightgray;
     border-collapse:collapse;
 }
 
 input, textarea, textarea:disabled {
     background-color:white;
-    border:1px solid black;
+    border:1px solid lightgray;
     border-radius:10px;
     padding:10px;
 }
@@ -41,6 +46,6 @@ input, textarea, textarea:disabled {
 }
  
 ::-webkit-scrollbar-thumb {
-    background:lightgray;
+    background-color:lightgray;
     border-radius:10px;
 }

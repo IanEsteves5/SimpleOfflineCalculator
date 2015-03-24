@@ -38,15 +38,23 @@ window.onload = function() {
         var newOutput = null;
         
         for(var i = 0 ; i < commands.length ; i++) {
-            if(commands[i].name === calculatorInput.value)
+            if(commands[i].name === calculatorInput.value) {
                 newOutput = commands[i].action();
+                break;
+            }
         }
         
         if(newOutput === null) {
             if(calculatorInput.value === "")
                 calculatorInput.value = "0";
             result = calculate(calculatorInput.value);
-            newOutput = (result === null ? "ERR" : result) + " = " + calculatorInput.value;
+            if(result === null) {
+                newOutput = "ERR = " + calculatorInput.value;
+            }
+            else {
+                newOutput =  result + " = " + calculatorInput.value;
+                calculatorInput.value = result;
+            }
         }
         
         calculatorOutput.textContent = newOutput + (calculatorOutput.textContent === "" ? "" : "\n") + calculatorOutput.textContent;

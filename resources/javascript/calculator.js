@@ -25,7 +25,7 @@ var tokenTypes = [ // Terminal symbols
 var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     new rule("INPUT", [
         new pattern(["EXPR"],                   function(nodes) {return nodes[0].val();}),
-        new pattern(["ERROR"],                  function(nodes) {pushErrorLog("ERROR"); return nodes[0].val();})
+        new pattern(["ERROR"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR", [
         new pattern(["EXPR", "+", "EXPR2_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
@@ -68,6 +68,7 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["real"],                   function(nodes) {return parseFloat(nodes[0].val());})
     ]),
     new rule("ERROR", [
+        new pattern(["ERROR", "err"],           function(nodes) {pushErrorLog("[" + (nodes[1].token.pos + 1) + "] unexpected character " + nodes[1].token.content[0]); return nodes[0].val();}),
         new pattern([],                         function(nodes) {return null;})
     ])
 ];
@@ -209,6 +210,7 @@ function parseTreeNode(children, action) {
 function parseTreeTerminalNode(token) {
     this.id = token.id;
     this.children = [];
-    this.val = function() {return token.content;};
+    this.token = token;
+    this.val = function() {return this.token.content;};
     this.tokensUsed = function() {return 1;};
 }

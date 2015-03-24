@@ -6,16 +6,16 @@ body {
 }
 
 #calculatorInput {
-    width:300px;
+    width:333px;
     margin:0px;
     margin-bottom:10px;
     vertical-align:middle;
 }
 
 #calculatorOutput {
-    width:300px;
-    height:300px;
-    resize:none;
+    width:333px;
+    height:333px;
     margin:0px;
+    resize:none;
     white-space:nowrap;
 }
