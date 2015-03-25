@@ -2,8 +2,9 @@
     "manifest_version": 2,
 
     "name": "Simple Offline Calculator",
+    "short_name": "S.O.Calc",
     "description": "Math happens.",
-    "version": "0.1",
+    "version": "0.2",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
 
@@ -19,6 +20,6 @@
             "38": "resources/image/icon_38.png"
         },
         "default_popup": "popup.html",
-        "default_title": "Simple Offline Calculator"
+        "default_title": "Simple Offline Calculator v0.2 beta"
     }
 }

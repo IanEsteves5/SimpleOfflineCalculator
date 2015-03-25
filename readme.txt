@@ -2,6 +2,9 @@ Simple Offline Calculator
 
 A calculator extension for Google Chrome.
 
+The latest release can be found in
+https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
+
 Type "help" to view available commands.
 
 Features
@@ -17,3 +20,11 @@ Planned updates
  - Graphs
 
 Suggestions are always welcome :)
+
+Versions
+
+0.1
+ - First release!
+ - Interprets mathematical expressions
+ - Supports operators +, -, *, /, %, ^ and parentheses
+ - A web page shows the order in which the operations are evaluated
