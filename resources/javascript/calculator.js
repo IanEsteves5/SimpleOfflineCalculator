@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator
+ *  Simple Offline Calculator v0.1
  *  By Ian Esteves do Nascimento, 2015
  *  
  *  Implementation of the parsing algorithms for a calculator.
@@ -16,7 +16,6 @@
 
 var tokenTypes = [ // Terminal symbols
     new tokenType("ws",    "\\s+"),
-    //new tokenType("id",    "[a-zA-Z_]\\w*"),
     new tokenType("real",  "\\d*\\.\\d+"),
     new tokenType("int",   "\\d+"),
     new tokenType("(",     "\\("),
@@ -27,12 +26,6 @@ var tokenTypes = [ // Terminal symbols
     new tokenType("/",     "/"),
     new tokenType("%",     "%"),
     new tokenType("^",     "\\^"),
-    //new tokenType("=",     "="),
-    //new tokenType(">",     ">"),
-    //new tokenType("<",     "<"),
-    //new tokenType(",",     ","),
-    //new tokenType(":",     ":"),
-    //new tokenType("\\?",     "?"),
     new tokenType("err", ".*")
 ];
 

@@ -8,10 +8,12 @@ Features
  - A popup browser action containing a simple calculator
  - A debug page that shows the parse tree
 
-Future features
+Planned updates
  - Memory
  - Boolean expressions
  - Conditional expressions
  - Functions
  - Constants
  - Graphs
+
+Suggestions are always welcome :)

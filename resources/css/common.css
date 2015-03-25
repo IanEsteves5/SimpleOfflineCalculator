@@ -1,15 +1,11 @@
 /*
- *  Simple Offline Calculator
+ *  Simple Offline Calculator v0.1
  *  By Ian Esteves do Nascimento, 2015
  */
 
 * {
     font-family:"Courier New", Courier, monospace;
     font-size:20px;
-}
-
-*:focus {
-    outline:0;
 }
 
 body {
@@ -38,6 +34,10 @@ h3 {
 table, tr, td, th {
     border-radius:0px;
     border-collapse:collapse;
+}
+
+:focus {
+    outline:0;
 }
 
 ::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator
+ *  Simple Offline Calculator v0.1
  *  By Ian Esteves do Nascimento, 2015
  */
 
