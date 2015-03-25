@@ -1,3 +1,17 @@
+/*
+ *  Simple Offline Calculator
+ *  By Ian Esteves do Nascimento, 2015
+ *  
+ *  Implementation of the parsing algorithms for a calculator.
+ *  
+ *  Usage:
+ *  
+ *  calculate(str)
+ *  
+ *  Returns the result or null in case of an error.
+ *  If there are error messages, they will appear in the errorLog variable.
+ */
+
 // Global variables
 
 var tokenTypes = [ // Terminal symbols

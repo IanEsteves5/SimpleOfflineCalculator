@@ -1,3 +1,8 @@
+/*
+ *  Simple Offline Calculator
+ *  By Ian Esteves do Nascimento, 2015
+ */
+
 var commands = [
     new command("help", function() {
         var result = "Commands :";

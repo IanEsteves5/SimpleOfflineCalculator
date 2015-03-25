@@ -1,3 +1,8 @@
+/*
+ *  Simple Offline Calculator
+ *  By Ian Esteves do Nascimento, 2015
+ */
+
 @import url(common.css);
 
 #inputString {
@@ -14,12 +19,11 @@ div.parseTreeNode {
     vertical-align:bottom;
     margin:0px;
     padding:5px;
-    padding-bottom: 0px;
+    padding-bottom:0px;
     white-space:nowrap;
 }
 
 #errorLog {
-    background-color:white;
     width:500px;
     white-space:nowrap;
 }

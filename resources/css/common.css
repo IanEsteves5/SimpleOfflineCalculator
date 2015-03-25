@@ -1,3 +1,8 @@
+/*
+ *  Simple Offline Calculator
+ *  By Ian Esteves do Nascimento, 2015
+ */
+
 * {
     font-family:"Courier New", Courier, monospace;
     font-size:20px;
@@ -23,17 +28,16 @@ h3 {
     font-size:22px;
 }
 
-table, tr, td, th {
-    background-color:white;
-    border: 1px solid lightgray;
-    border-collapse:collapse;
-}
-
-input, textarea, textarea:disabled {
+.standard, input, input:disabled, textarea, textarea:disabled, table, tr, td, th {
     background-color:white;
     border:1px solid lightgray;
     border-radius:10px;
     padding:10px;
+}
+
+table, tr, td, th {
+    border-radius:0px;
+    border-collapse:collapse;
 }
 
 ::-webkit-scrollbar {

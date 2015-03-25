@@ -1,3 +1,8 @@
+/*
+ *  Simple Offline Calculator
+ *  By Ian Esteves do Nascimento, 2015
+ */
+
 function getParseTreeDiv(parseTree) {
     if(parseTree === null)
         return "<div class='parseTreeNode'>NULL</div>";
