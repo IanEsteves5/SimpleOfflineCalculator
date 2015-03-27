@@ -23,6 +23,10 @@ Suggestions are always welcome :)
 
 Versions
 
+0.2 beta
+ - More error messages
+ - Added memory support
+
 0.1
  - First release!
  - Interprets mathematical expressions

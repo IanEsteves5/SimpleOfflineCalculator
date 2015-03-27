@@ -11,8 +11,17 @@ var commands = [
         return result;
     }),
     new command("clear", function() {
-        calculatorOutput.textContent = "";
+        document.getElementById("calculatorInput").value = "";
+        document.getElementById("calculatorOutput").textContent = "";
         return "";
+    }),
+    new command("memory", function() {
+        if(memory.length === 0)
+            return "Empty"
+        var result = memory[0].id + " = " + memory[0].val;
+        for(var i = 1 ; i < memory.length ; i++)
+            result += "\n" + memory[i].id + " = " + memory[i].val;
+        return result;
     }),
     new command("log", function() {
         return errorLog;
@@ -23,10 +32,16 @@ var commands = [
     })
 ];
 
+var secretCommands = [
+    new command(String.fromCharCode(0x50)+String.fromCharCode(0x45)+String.fromCharCode(0x4E)+String.fromCharCode(0x49)+String.fromCharCode(0x53), function() {
+        return String.fromCharCode(0x38)+String.fromCharCode(0x3D)+String.fromCharCode(0x3D)+String.fromCharCode(0x3D)+String.fromCharCode(0x3D)+String.fromCharCode(0x3D)+String.fromCharCode(0x44)+String.fromCharCode(0x7E)+String.fromCharCode(0x7E)+String.fromCharCode(0x7E);
+    })
+];
+
 function command(name, action) {
     this.name = name;
     this.action = action; // Action returns a message to the user.
-}
+};
 
 window.onload = function() {
     
@@ -45,6 +60,13 @@ window.onload = function() {
         for(var i = 0 ; i < commands.length ; i++) {
             if(commands[i].name === calculatorInput.value) {
                 newOutput = commands[i].action();
+                break;
+            }
+        }
+        
+        for(var i = 0 ; i < secretCommands.length ; i++) {
+            if(secretCommands[i].name === calculatorInput.value) {
+                newOutput = secretCommands[i].action();
                 break;
             }
         }

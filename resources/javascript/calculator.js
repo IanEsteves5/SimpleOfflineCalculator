@@ -10,15 +10,17 @@
  *  
  *  Returns the result or null in case of an error.
  *  If there are error messages, they will appear in the errorLog variable.
+ *  The calculator memory is stored in the memory variable
  */
 
 // Global variables
 
 var tokenTypes = [ // Terminal symbols
     new tokenType("ws",    "\\s+"),
-    //new tokenType("id",    "[a-zA-Z_]\\w*"),
+    new tokenType("id",    "[a-zA-Z_]\\w*"),
     new tokenType("real",  "\\d*\\.\\d+"),
     new tokenType("int",   "\\d+"),
+    new tokenType(":=",     ":="),
     new tokenType("(",     "\\("),
     new tokenType(")",     "\\)"),
     new tokenType("+",     "\\+"),
@@ -42,50 +44,87 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["ERROR"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR", [
-        new pattern(["EXPR", "+", "EXPR2_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
-        new pattern(["EXPR", "-", "EXPR2_R+"],  function(nodes) {return nodes[0].val() - nodes[2].val();}),
-        new pattern(["EXPR", "ws"],             function(nodes) {return nodes[0].val();}),
-        new pattern(["ws", "EXPR2"],            function(nodes) {return nodes[1].val();}),
+        new pattern(["id", ":=", "EXPR2"],      function(nodes) {
+                                                    for(var i = 0 ; i < memory.length ; i++)
+                                                        if(memory[i].id === nodes[0].val())
+                                                            return memory[i].val = nodes[2].val();
+                                                    memory.push(new memoryEntry(nodes[0].val(), nodes[2].val()));
+                                                    return memory[memory.length-1].val;
+                                                }),
         new pattern(["EXPR2"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR2", [
-        new pattern(["EXPR2", "*", "EXPR3"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        new pattern(["EXPR2", "/", "EXPR3"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        new pattern(["EXPR2", "%", "EXPR3"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR2", "+", "EXPR3_R+"],  function(nodes) {return nodes[0].val() + nodes[2].val();}),
+        new pattern(["EXPR2", "-", "EXPR3_R+"],  function(nodes) {return nodes[0].val() - nodes[2].val();}),
         new pattern(["EXPR3"],                  function(nodes) {return nodes[0].val();})
     ]),
-    new rule("EXPR2_R+", [
-        new pattern(["EXPR2_R+", "*", "EXPR3"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        new pattern(["EXPR2_R+", "/", "EXPR3"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        new pattern(["EXPR2_R+", "%", "EXPR3"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
-        new pattern(["EXPR3_R+"],               function(nodes) {return nodes[0].val();})
-    ]),
     new rule("EXPR3", [
-        new pattern(["EXPR3", "^", "EXPR4"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR3", "*", "EXPR4"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR3", "/", "EXPR4"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR3", "%", "EXPR4"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
         new pattern(["EXPR4"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR3_R+", [
-        new pattern(["EXPR3_R+", "^", "EXPR4"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
-        new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
+        new pattern(["EXPR3_R+", "*", "EXPR4"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR3_R+", "/", "EXPR4"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR3_R+", "%", "EXPR4"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR4_R+"],               function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR4", [
-        new pattern(["+", "EXPR5"],             function(nodes) {return nodes[1].val();}),
-        new pattern(["-", "EXPR5"],             function(nodes) {return -nodes[1].val();}),
+        new pattern(["EXPR4", "^", "EXPR5"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
         new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
     ]),
+    new rule("EXPR4_R+", [
+        new pattern(["EXPR4_R+", "^", "EXPR5"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR6"],                  function(nodes) {return nodes[0].val();})
+    ]),
     new rule("EXPR5", [
+        new pattern(["+", "EXPR6"],             function(nodes) {return nodes[1].val();}),
+        new pattern(["-", "EXPR6"],             function(nodes) {return -nodes[1].val();}),
+        new pattern(["EXPR6"],                  function(nodes) {return nodes[0].val();})
+    ]),
+    new rule("EXPR6", [
         new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
-        new pattern(["NUM"],                    function(nodes) {return nodes[0].val();})
+        new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
+        new pattern(["id"],                     function(nodes) {
+                                                    for(var i = 0 ; i < memory.length ; i++) {
+                                                        if(memory[i].id === nodes[0].val()) {
+                                                            return memory[i].val;
+                                                        }
+                                                    }
+                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined variable " + nodes[i].val());
+                                                    return Number.NaN;
+                                                })
     ]),
     new rule("NUM", [
         new pattern(["int"],                    function(nodes) {return parseInt(nodes[0].val());}),
         new pattern(["real"],                   function(nodes) {return parseFloat(nodes[0].val());})
     ]),
     new rule("ERROR", [
-        new pattern(["ERROR", "err"],           function(nodes) {pushErrorLog("[" + (nodes[1].token.pos + 1) + "] unexpected character " + nodes[1].token.content[0]); return nodes[0].val();}),
-        new pattern([],                         function(nodes) {return null;})
+        new pattern([],                         function(nodes) {
+                                                    errorLog = "";
+                                                    for(var i = 0 ; i < nodes.length ; i++) {
+                                                        if(nodes[i].id === "err") {
+                                                            pushErrorLog("[" + (nodes[i].token.pos + 1) + "] unexpected input " + nodes[i].val());
+                                                            continue;
+                                                        }
+                                                        if(nodes[i].id === "+" || nodes[i].id === "-") {
+                                                            var str = nodes[i].id;
+                                                            for(var j = i+1 ; j < nodes.length && (nodes[j].id === "+" || nodes[j].id === "-") ; j++)
+                                                                str += nodes[j].id;
+                                                            if(str.length > 1) {
+                                                                pushErrorLog("[" + (nodes[i].token.pos + 1) + "] unexpected input " + str);
+                                                                i += str.length - 1;
+                                                            }
+                                                            continue;
+                                                        }
+                                                    }
+                                                    return null;
+                                                })
     ])
 ];
+
+var memory = [];
 
 var errorLog = "";
 
@@ -108,7 +147,11 @@ function getTokens(str) {
 };
 
 function getParseTree(tokens) {
-    return rules[0].getParseTree(tokens, 0, true);
+    var cleanTokens = [];
+    for(var i = 0 ; i < tokens.length ; i++)
+        if(tokens[i].id !== "ws")
+            cleanTokens.push(tokens[i]);
+    return rules[0].getParseTree(cleanTokens, 0, true);
 };
 
 function calculate(str) {
@@ -207,12 +250,13 @@ function pattern(elements, action) {
             return null;
         return new parseTreeNode(children, action);
     };
-}
+};
 
 function parseTreeNode(children, action) {
     this.id = "";
     this.children = children;
     this.val = function() {return action(children);};
+    this.pos = this.children[0].pos;
     this.tokensUsed = function() {
         result = 0;
         for(var i = 0 ; i < children.length ; i++)
@@ -226,5 +270,11 @@ function parseTreeTerminalNode(token) {
     this.children = [];
     this.token = token;
     this.val = function() {return this.token.content;};
+    this.pos = token.pos;
     this.tokensUsed = function() {return 1;};
-}
+};
+
+function memoryEntry(id, val) {
+    this.id = id;
+    this.val = val;
+};

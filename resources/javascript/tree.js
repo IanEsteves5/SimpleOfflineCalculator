@@ -8,14 +8,13 @@ function getParseTreeDiv(parseTree) {
         return "<div class='parseTreeNode'>NULL</div>";
     else {
         result = "<div class='parseTreeNode'>";
-        //result += parseTree.id + "<br />" + parseTree.val() + "<br />";
         var returnedValue = parseTree.val();
         result += parseTree.id + (parseTree.id === returnedValue ? "" : " " + returnedValue) + "<br />";
         for(var i = 0 ; i < parseTree.children.length ; i++)
             result += getParseTreeDiv(parseTree.children[i]);
         return result + "</div>";
     }
-}
+};
 
 window.onload = function() {
     var content = "<tr><th>id</th><th>regex</th></tr>";
@@ -35,7 +34,11 @@ window.onload = function() {
     
     // Registering events
     
-    document.getElementById("inputString").oninput = function() {
+    document.getElementById("inputString").onkeyup = function() {
+        
+        errorLog = "";
+        memory = [];
+        
         var inputString = document.getElementById("inputString").value;
         var tokens = getTokens(inputString);
         var parseTree = getParseTree(tokens);
@@ -46,15 +49,17 @@ window.onload = function() {
             content += "<tr><td>" + tokens[i].id + "</td><td>" + tokens[i].pos + "</td><td>" + tokens[i].content + "</td></tr>";
         }
         document.getElementById("tokens").innerHTML = content;
-    
-        document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);
         
         document.getElementById("result").innerHTML = result === null ? "null" : result;
         
-        errorLog = "";
-        parseTree.val();
+        var content = "";
+        for(var i = 0 ; i < memory.length ; i++)
+            content += (i === 0 ? "" : "\n") + memory[i].id + " = " + memory[i].val;
+        document.getElementById("memory").textContent = content;
         
         document.getElementById("errorLog").textContent = errorLog;
+    
+        document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);
         
     };
 };

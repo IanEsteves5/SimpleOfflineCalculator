@@ -23,7 +23,9 @@ div.parseTreeNode {
     white-space:nowrap;
 }
 
-#errorLog {
+#memory, #errorLog {
     width:500px;
+    min-height:150px;
+    resize:vertical;
     white-space:nowrap;
 }
