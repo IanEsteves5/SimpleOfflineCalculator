@@ -1,22 +1,26 @@
 Simple Offline Calculator
 
 A calculator extension for Google Chrome.
+This extension is 100% open source.
 
 The latest release can be found in
 https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
 
-Type "help" to view available commands.
+Commands
+ - help : shows all commands
+ - clear : clears the results screen
+ - memory : shows values stored in memory
+ - log : shows error log for the last calculation done
+ - functions : shows available functions
+ - tree : shows debug window
 
 Features
  - A popup browser action containing a simple calculator
+ - Has no idle processes (no performance hit while it's not being used)
  - A debug page that shows the parse tree
 
 Planned updates
- - Memory
- - Boolean expressions
- - Conditional expressions
- - Functions
- - Constants
+ - More error messages
  - Graphs
 
 Suggestions are always welcome :)

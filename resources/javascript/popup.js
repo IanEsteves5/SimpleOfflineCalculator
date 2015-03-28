@@ -26,6 +26,16 @@ var commands = [
     new command("log", function() {
         return errorLog;
     }),
+    new command("functions", function() {
+        var result = "";
+        for(var i = 0 ; i < mathFunctions.length ; i++) {
+            result += (i === 0 ? "" : "\n") + mathFunctions[i].id + "(";
+            for(var j = 0 ; j < mathFunctions[i].numArgs ; j++)
+                result += (j === 0 ? "" : ",") + "x" + (mathFunctions[i].numArgs === 1 ? "" : j+1);
+            result += ")";
+        }
+        return result;
+    }),
     new command("tree", function() {
         window.open("tree.html", "Tree");
         return "Opening tree...";

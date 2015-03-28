@@ -9,6 +9,8 @@ function getParseTreeDiv(parseTree) {
     else {
         result = "<div class='parseTreeNode'>";
         var returnedValue = parseTree.val();
+        if(returnedValue.constructor === Array)
+            returnedValue = "[" + returnedValue.join() + "]";
         result += parseTree.id + (parseTree.id === returnedValue ? "" : " " + returnedValue) + "<br />";
         for(var i = 0 ; i < parseTree.children.length ; i++)
             result += getParseTreeDiv(parseTree.children[i]);
@@ -28,7 +30,7 @@ window.onload = function() {
         content += "<tr><td>" + rules[i].id + "</td><td>";
         for(var j = 0 ; j < rules[i].patterns.length ; j++)
             content +=  rules[i].patterns[j].getPatternString() + "<br />";
-        content += "</td></tr>"
+        content += "</td></tr>";
     }
     document.getElementById("rules").innerHTML = content;
     
@@ -42,13 +44,13 @@ window.onload = function() {
         errorLog = "";
         memory = [];
         
-        t0 = new Date();
+        t0 = window.performance.now();
         var tokens = getTokens(inputString);
-        t1 = new Date();
+        t1 = window.performance.now();
         var parseTree = getParseTree(tokens);
-        t2 = new Date();
+        t2 = window.performance.now();
         var result = parseTree.val();
-        t3 = new Date();
+        t3 = window.performance.now();
         
         content = "<tr><th>id</th><th>pos</th><th>content</th></tr>";
         for(var i = 0 ; i < tokens.length ; i++) {
@@ -65,9 +67,9 @@ window.onload = function() {
         
         document.getElementById("errorLog").textContent = errorLog;
         
-        content = "generating tokens : " + (t1.getTime() - t0.getTime() < 1 ? "< 1" : t1.getTime() - t0.getTime()) + "ms\n";
-        content += "generating parse tree : " + (t2.getTime() - t1.getTime() < 1 ? "< 1" : t2.getTime() - t1.getTime()) + "ms\n";
-        content += "calculating result : " + (t3.getTime() - t2.getTime() < 1 ? "< 1" : t3.getTime() - t2.getTime()) + "ms\n";
+        content = "generating tokens : " + Math.floor((t1 - t0)*1000)/1000 + "ms\n";
+        content += "generating parse tree : " + Math.floor((t2 - t1)*1000)/1000 + "ms\n";
+        content += "calculating result : " + Math.floor((t3 - t2)*1000)/1000 + "ms\n";
         document.getElementById("timings").textContent = content;
     
         document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);

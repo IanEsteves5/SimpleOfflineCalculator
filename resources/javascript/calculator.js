@@ -97,16 +97,28 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     ]),
     new rule("EXPR7", [
         new pattern(["id", "(", "ARGS", ")"],   function(nodes) {
-                                                    for(var i = 0 ; i < mathFunctions.length ; i++)
-                                                        if(mathFunctions[i].id === nodes[0].val())
+                                                    for(var i = 0 ; i < mathFunctions.length ; i++) {
+                                                        if(mathFunctions[i].id === nodes[0].val()) {
+                                                            if(mathFunctions[i].numArgs !== nodes[2].val().length) {
+                                                                pushErrorLog("[" + (nodes[0].token.pos + 1) + "] " + nodes[0].val() + " expected " + mathFunctions[i].numArgs + (mathFunctions[i].numArgs === 1 ? " argument" : " arguments"));
+                                                                return Number.NaN;
+                                                            }
                                                             return mathFunctions[i].action(nodes[2].val());
+                                                        }
+                                                    }
                                                     pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined function " + nodes[0].val());
                                                     return Number.NaN;
                                                 }),
         new pattern(["id", "(", ")"],   function(nodes) {
-                                                    for(var i = 0 ; i < mathFunctions.length ; i++)
-                                                        if(mathFunctions[i].id === nodes[0].val())
+                                                    for(var i = 0 ; i < mathFunctions.length ; i++) {
+                                                        if(mathFunctions[i].id === nodes[0].val()) {
+                                                            if(mathFunctions[i].numArgs !== 0) {
+                                                                pushErrorLog("[" + (nodes[0].token.pos + 1) + "] " + nodes[0].val() + " expected " + mathFunctions[i].numArgs + (mathFunctions[i].numArgs === 1 ? " argument" : " arguments"));
+                                                                return Number.NaN;
+                                                            }
                                                             return mathFunctions[i].action([]);
+                                                        }
+                                                    }
                                                     pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined function " + nodes[0].val());
                                                     return Number.NaN;
                                                 }),
@@ -121,7 +133,7 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
                                                 })
     ]),
     new rule("ARGS", [
-        new pattern(["ARGS", ",", "EXPR"],      function(nodes) {return nodes[0].val().push(nodes[2].val());}),
+        new pattern(["ARGS", ",", "EXPR"],      function(nodes) {return nodes[0].val().concat(nodes[2].val());}),
         new pattern(["EXPR"],                   function(nodes) {return [nodes[0].val()];})
     ]),
     new rule("NUM", [
@@ -177,10 +189,22 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
 ];
 
 var mathFunctions = [
-    new mathFunction("random", 0, function(args) {return Math.random();}),
+    new mathFunction("log", 2, function(args) {return Math.log(args[0])/Math.log(args[1]);}),
+    new mathFunction("trunc", 2, function(args) {
+                                     var offset = Math.pow(10, Math.floor(args[1]));
+                                     return Math.floor(args[0]*offset)/offset;
+                                 }),
+    new mathFunction("exp", 1, function(args) {return Math.exp(args[0]);}),
+    new mathFunction("ln", 1, function(args) {return Math.log(args[0]);}),
+    new mathFunction("round", 1, function(args) {return Math.round(args[0]);}),
+    new mathFunction("floor", 1, function(args) {return Math.floor(args[0]);}),
+    new mathFunction("abs", 1, function(args) {return Math.abs(args[0]);}),
     new mathFunction("sin", 1, function(args) {return Math.sin(args[0]);}),
     new mathFunction("cos", 1, function(args) {return Math.cos(args[0]);}),
-    new mathFunction("tan", 1, function(args) {return Math.tan(args[0]);})
+    new mathFunction("tan", 1, function(args) {return Math.tan(args[0]);}),
+    new mathFunction("random", 0, function(args) {return Math.random();}),
+    new mathFunction("pi", 0, function(args) {return Math.PI;}),
+    new mathFunction("e", 0, function(args) {return Math.E;})
 ];
 
 var memory = [];
@@ -270,9 +294,11 @@ function pattern(elements, action) {
         for(var i = 0 ; i < this.elements.length ; i++) { // Checking if all terminal symbols are present in the tokens
             if(isTokenType(this.elements[i])) {
                 var tokenFound = false;
-                for(var j = 0 ; j < tokens.length - tokensUsed ; j++) {
+                var nextStart = 0;
+                for(var j = nextStart ; j < tokens.length - tokensUsed ; j++) {
                     if(this.elements[i] === tokens[j].id) {
                         tokenFound = true;
+                        nextStart = j + 1;
                         break;
                     }
                 }
@@ -311,22 +337,6 @@ function pattern(elements, action) {
             remainingTokens -= node.tokensUsed();
         }
         
-        if(isLast && remainingTokens === 0) { // Checks if pattern can be reduced to nothing
-            while(remainingElements > 0) {
-                remainingElements--;
-                var node = null;
-                for(var i = 0 ; i < rules.length ; i++) {
-                    if(this.elements[remainingElements] === rules[i].id) {
-                        node = rules[i].getParseTree(tokens, tokens.length - remainingTokens, isLast && remainingElements === 0);
-                        break;
-                    }
-                }
-                if(node === null)
-                    return null;
-                children.unshift(node);
-            }
-        }
-        
         if(remainingElements > 0)
             return null;
         if(isLast && remainingTokens > 0)
@@ -360,13 +370,7 @@ function parseTreeTerminalNode(token) {
 function mathFunction(id, numArgs, func) {
     this.id = id;
     this.numArgs = numArgs;
-    this.action = function(args) {
-        if(args.length !== this.numArgs) {
-            pushErrorLog("[" + this.id + "] expected " + this.numArgs + (this.numArgs === 1 ? " argument" : " arguments"));
-            return Number.NaN;
-        }
-        return func(args);
-    };
+    this.action = function(args) {return func(args);};
 };
 
 function memoryEntry(id, val) {
