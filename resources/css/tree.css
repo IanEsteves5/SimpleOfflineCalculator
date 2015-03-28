@@ -1,9 +1,9 @@
 /*
- *  Simple Offline Calculator v0.1
+ *  Simple Offline Calculator v0.2
  *  By Ian Esteves do Nascimento, 2015
  */
 
-@import url(common.css);
+@import url(common.min.css);
 
 #inputString {
     width:500px;
@@ -23,7 +23,9 @@ div.parseTreeNode {
     white-space:nowrap;
 }
 
-#errorLog {
+textarea.treeTextArea {
     width:500px;
+    min-height:150px;
+    resize:vertical;
     white-space:nowrap;
 }

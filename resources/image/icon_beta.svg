@@ -21,7 +21,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="icon.svg">
+   sodipodi:docname="icon_beta.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -54,8 +54,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="134.76993"
-     inkscape:cy="538.23314"
+     inkscape:cx="401.39177"
+     inkscape:cy="438.98536"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -95,17 +95,16 @@
        ry="505.55371" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:592.89648438px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New';letter-spacing:-62.07774734px;word-spacing:0px;writing-mode:lr-tb;fill:#007aa0;fill-opacity:1;stroke:#007aa0;stroke-width:21.04724338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
-       x="-115.8949"
-       y="720.81653"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:814.69934082px;line-height:125%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';text-align:start;letter-spacing:-85.30085754px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#007aa0;fill-opacity:1;stroke:#007aa0;stroke-width:18.83728162;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="178.50365"
+       y="698.40082"
        id="text4138"
        sodipodi:linespacing="125%"
        transform="scale(1.004035,0.99598122)"><tspan
          sodipodi:role="line"
          id="tspan4140"
-         x="-115.8949"
-         y="720.81653"
-         rotate="0 0 0"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New';baseline-shift:baseline;stroke:#007aa0;stroke-width:21.04724338;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;">123</tspan></text>
+         x="178.50365"
+         y="698.40082"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:814.69934082px;line-height:125%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke:#007aa0;stroke-width:18.83728162;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">β</tspan></text>
   </g>
 </svg>

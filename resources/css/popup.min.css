@@ -1,1 +1,1 @@
-@import url("common.css");body{margin:0;padding:2px}#calculatorInput{width:333px;margin:0;margin-bottom:10px;vertical-align:middle}#calculatorOutput{width:333px;height:333px;margin:0;resize:none;white-space:nowrap}
+@import url("common.min.css");body{margin:0;padding:2px}#calculatorInput{width:333px;margin:0;margin-bottom:10px;vertical-align:middle}#calculatorOutput{width:333px;height:333px;margin:0;resize:none;white-space:nowrap}

@@ -1,4 +1,4 @@
- ::  Simple Offline Calculator v0.1
+ ::  Simple Offline Calculator v0.2
  ::  By Ian Esteves do Nascimento, 2015
  ::
  ::  This script minimizes the javascript files using Yui Compressor http://yui.github.io/yuicompressor/
