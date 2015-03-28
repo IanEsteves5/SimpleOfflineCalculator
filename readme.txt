@@ -28,6 +28,7 @@ Versions
  - Added memory support
  - Added conditional expressions
  - Added input history
+ - Added functions
 
 0.1
  - First release!

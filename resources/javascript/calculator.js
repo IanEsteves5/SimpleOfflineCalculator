@@ -40,7 +40,7 @@ var tokenTypes = [ // Terminal symbols
     new tokenType("|",     "\\|"),
     new tokenType("?",     "\\?"),
     new tokenType(":",     ":"),
-    //new tokenType(",",     ","),
+    new tokenType(",",     ","),
     new tokenType("err", ".*")
 ];
 
@@ -96,17 +96,36 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["EXPR7"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR7", [
+        new pattern(["FUNC"],                   function(nodes) {return nodes[0].val();}),
         new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
         new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
         new pattern(["id"],                     function(nodes) {
-                                                    for(var i = 0 ; i < memory.length ; i++) {
-                                                        if(memory[i].id === nodes[0].val()) {
+                                                    for(var i = 0 ; i < memory.length ; i++)
+                                                        if(memory[i].id === nodes[0].val())
                                                             return memory[i].val;
-                                                        }
-                                                    }
-                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined variable " + nodes[i].val());
+                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined variable " + nodes[0].val());
                                                     return Number.NaN;
                                                 })
+    ]),
+    new rule("FUNC", [
+        new pattern(["id", "(", "ARGS", ")"],   function(nodes) {
+                                                    for(var i = 0 ; i < mathFunctions.length ; i++)
+                                                        if(mathFunctions[i].id === nodes[0].val())
+                                                            return mathFunctions[i].action(nodes[2].val());
+                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined function " + nodes[0].val());
+                                                    return Number.NaN;
+                                                }),
+        new pattern(["id", "(", ")"],   function(nodes) {
+                                                    for(var i = 0 ; i < mathFunctions.length ; i++)
+                                                        if(mathFunctions[i].id === nodes[0].val())
+                                                            return mathFunctions[i].action([]);
+                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined function " + nodes[0].val());
+                                                    return Number.NaN;
+                                                })
+    ]),
+    new rule("ARGS", [
+        new pattern(["ARGS", ",", "EXPR"],      function(nodes) {return nodes[0].val().push(nodes[2].val());}),
+        new pattern(["EXPR"],                   function(nodes) {return [nodes[0].val()];})
     ]),
     new rule("NUM", [
         new pattern(["int"],                    function(nodes) {return parseInt(nodes[0].val());}),
@@ -158,6 +177,13 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
                                                     return null;
                                                 })
     ])
+];
+
+var mathFunctions = [
+    new mathFunction("random", 0, function(args) {return Math.random();}),
+    new mathFunction("sin", 1, function(args) {return Math.sin(args[0]);}),
+    new mathFunction("cos", 1, function(args) {return Math.cos(args[0]);}),
+    new mathFunction("tan", 1, function(args) {return Math.tan(args[0]);})
 ];
 
 var memory = [];
@@ -308,6 +334,18 @@ function parseTreeTerminalNode(token) {
     this.val = function() {return this.token.content;};
     this.pos = token.pos;
     this.tokensUsed = function() {return 1;};
+};
+
+function mathFunction(id, numArgs, func) {
+    this.id = id;
+    this.numArgs = numArgs;
+    this.action = function(args) {
+        if(args.length !== this.numArgs) {
+            pushErrorLog("[" + this.id + "] expected " + this.numArgs + (this.numArgs === 1 ? " argument" : " arguments"));
+            return Number.NaN;
+        }
+        return func(args);
+    };
 };
 
 function memoryEntry(id, val) {
