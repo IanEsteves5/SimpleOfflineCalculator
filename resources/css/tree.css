@@ -23,7 +23,7 @@ div.parseTreeNode {
     white-space:nowrap;
 }
 
-#memory, #errorLog {
+textarea.treeTextArea {
     width:500px;
     min-height:150px;
     resize:vertical;

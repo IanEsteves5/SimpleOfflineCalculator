@@ -96,18 +96,6 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["EXPR7"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR7", [
-        new pattern(["FUNC"],                   function(nodes) {return nodes[0].val();}),
-        new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
-        new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
-        new pattern(["id"],                     function(nodes) {
-                                                    for(var i = 0 ; i < memory.length ; i++)
-                                                        if(memory[i].id === nodes[0].val())
-                                                            return memory[i].val;
-                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined variable " + nodes[0].val());
-                                                    return Number.NaN;
-                                                })
-    ]),
-    new rule("FUNC", [
         new pattern(["id", "(", "ARGS", ")"],   function(nodes) {
                                                     for(var i = 0 ; i < mathFunctions.length ; i++)
                                                         if(mathFunctions[i].id === nodes[0].val())
@@ -120,6 +108,15 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
                                                         if(mathFunctions[i].id === nodes[0].val())
                                                             return mathFunctions[i].action([]);
                                                     pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined function " + nodes[0].val());
+                                                    return Number.NaN;
+                                                }),
+        new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
+        new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
+        new pattern(["id"],                     function(nodes) {
+                                                    for(var i = 0 ; i < memory.length ; i++)
+                                                        if(memory[i].id === nodes[0].val())
+                                                            return memory[i].val;
+                                                    pushErrorLog("[" + (nodes[0].token.pos + 1) + "] undefined variable " + nodes[0].val());
                                                     return Number.NaN;
                                                 })
     ]),
@@ -208,11 +205,20 @@ function getTokens(str) {
     return tokens;
 };
 
+function isTokenType(id) {
+    for(var i = 0 ; i < tokenTypes.length ; i++)
+        if(tokenTypes[i].id === id)
+            return true;
+    return false;
+}
+
 function getParseTree(tokens) {
-    var cleanTokens = [];
+    // ***** OPTIMIZATIONS *****
+    var cleanTokens = []; // Removing white spaces
     for(var i = 0 ; i < tokens.length ; i++)
         if(tokens[i].id !== "ws")
             cleanTokens.push(tokens[i]);
+    // *************************
     return rules[0].getParseTree(cleanTokens, 0, true);
 };
 
@@ -242,9 +248,9 @@ function token(id, pos, content) {
 function rule(id, patterns) {
     this.id = id;
     this.patterns = patterns;
-    this.getParseTree = function(tokens, tokensUsed, isLast) { // isLast records weather the rule is
-        for(var i = 0 ; i < patterns.length ; i++) {           // in the beginning of the expression
-            var parseTree = patterns[i].getParseTree(tokens, tokensUsed, isLast);
+    this.getParseTree = function(tokens, tokensUsed, isLast) { // isLast records weather the rule is in the beginning of the expression
+        for(var i = 0 ; i < this.patterns.length ; i++) {
+            var parseTree = this.patterns[i].getParseTree(tokens, tokensUsed, isLast);
             if(parseTree !== null) {
                 parseTree.id = id;
                 return parseTree;
@@ -260,6 +266,21 @@ function pattern(elements, action) {
         return "[" + this.elements.join(" ") + "]";
     };
     this.getParseTree = function(tokens, tokensUsed, isLast) {
+        // ***** OPTIMIZATIONS *****
+        for(var i = 0 ; i < this.elements.length ; i++) { // Checking if all terminal symbols are present in the tokens
+            if(isTokenType(this.elements[i])) {
+                var tokenFound = false;
+                for(var j = 0 ; j < tokens.length - tokensUsed ; j++) {
+                    if(this.elements[i] === tokens[j].id) {
+                        tokenFound = true;
+                        break;
+                    }
+                }
+                if(!tokenFound)
+                    return null;
+            }
+        }
+        // *************************
         var children = [];
         var remainingTokens = tokens.length - tokensUsed;
         var remainingElements = this.elements.length;

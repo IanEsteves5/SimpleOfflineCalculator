@@ -36,15 +36,21 @@ window.onload = function() {
     
     document.getElementById("inputString").onkeyup = function() {
         
+        var inputString = document.getElementById("inputString").value;
+        var content = "";
+        var t0, t1, t2, t3;
         errorLog = "";
         memory = [];
         
-        var inputString = document.getElementById("inputString").value;
+        t0 = new Date();
         var tokens = getTokens(inputString);
+        t1 = new Date();
         var parseTree = getParseTree(tokens);
+        t2 = new Date();
         var result = parseTree.val();
+        t3 = new Date();
         
-        var content = "<tr><th>id</th><th>pos</th><th>content</th></tr>";
+        content = "<tr><th>id</th><th>pos</th><th>content</th></tr>";
         for(var i = 0 ; i < tokens.length ; i++) {
             content += "<tr><td>" + tokens[i].id + "</td><td>" + tokens[i].pos + "</td><td>" + tokens[i].content + "</td></tr>";
         }
@@ -58,6 +64,11 @@ window.onload = function() {
         document.getElementById("memory").textContent = content;
         
         document.getElementById("errorLog").textContent = errorLog;
+        
+        content = "generating tokens : " + (t1.getTime() - t0.getTime() < 1 ? "< 1" : t1.getTime() - t0.getTime()) + "ms\n";
+        content += "generating parse tree : " + (t2.getTime() - t1.getTime() < 1 ? "< 1" : t2.getTime() - t1.getTime()) + "ms\n";
+        content += "calculating result : " + (t3.getTime() - t2.getTime() < 1 ? "< 1" : t3.getTime() - t2.getTime()) + "ms\n";
+        document.getElementById("timings").textContent = content;
     
         document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);
         

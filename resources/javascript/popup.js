@@ -111,7 +111,7 @@ window.onload = function() {
             if(calculatorInput.value === "")
                 calculatorInput.value = "0";
             result = calculate(calculatorInput.value);
-            if(result === null) {
+            if(result === null || isNaN(result)) {
                 newOutput = "ERR = " + calculatorInput.value;
             }
             else {
