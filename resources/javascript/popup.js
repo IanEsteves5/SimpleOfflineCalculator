@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.2 beta
+ *  Simple Offline Calculator v0.2
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -17,7 +17,7 @@ var commands = [
     }),
     new command("memory", function() {
         if(memory.length === 0)
-            return "Empty"
+            return "Empty";
         var result = memory[0].id + " = " + memory[0].val;
         for(var i = 1 ; i < memory.length ; i++)
             result += "\n" + memory[i].id + " = " + memory[i].val;

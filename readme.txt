@@ -10,14 +10,16 @@ Commands
  - help : shows all commands
  - clear : clears the results screen
  - memory : shows values stored in memory
+            using memory : <name> := <value>
+            example : x := 3+10^2
  - log : shows error log for the last calculation done
  - functions : shows available functions
  - tree : shows debug window
 
 Features
  - A popup browser action containing a simple calculator
- - Has no idle processes (no performance hit while it's not being used)
- - A debug page that shows the parse tree
+ - No idle processes (no performance hit while it's not being used)
+ - A debug page that shows the parse tree and other information
 
 Planned updates
  - More error messages
@@ -27,7 +29,7 @@ Suggestions are always welcome :)
 
 Versions
 
-0.2 beta
+0.2
  - More error messages
  - Added memory support
  - Added conditional expressions

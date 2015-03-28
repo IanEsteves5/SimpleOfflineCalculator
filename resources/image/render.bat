@@ -1,8 +1,8 @@
- ::  Simple Offline Calculator v0.2 beta
+ ::  Simple Offline Calculator v0.2
  ::  By Ian Esteves do Nascimento, 2015
  ::
  ::  This script renders the icon in all resolutions needed using inkscape https://inkscape.org/
- ::  Inkscape has to be installed in the standard folder
+ ::  Inkscape must be installed in the standard folder
  ::  To see the icon usage, view manifest.json
 
 set INKSCAPE_EXE="C:\Program Files\Inkscape\inkscape.exe"
