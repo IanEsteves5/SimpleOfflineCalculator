@@ -38,6 +38,8 @@ var secretCommands = [
     })
 ];
 
+var inputHistory = [];
+
 function command(name, action) {
     this.name = name;
     this.action = action; // Action returns a message to the user.
@@ -52,19 +54,53 @@ window.onload = function() {
     // Registering events
     
     calculatorInput.onkeyup = function(event) {
-        if(event.keyCode !== 13)
+        if(event.keyCode === 38) { // arrow up
+            if(inputHistory[0] === calculatorInput.value)
+                return;
+            for(var i = 1 ; i < inputHistory.length ; i++) {
+                if(inputHistory[i] === calculatorInput.value) {
+                    calculatorInput.value = inputHistory[i-1];
+                    return;
+                }
+            }
+            calculatorInput.value = inputHistory[inputHistory.length-1];
             return;
-            
-        var newOutput = null;
+        }
         
-        for(var i = 0 ; i < commands.length ; i++) {
+        if(event.keyCode === 40) { // arrow down
+            for(var i = 0 ; i < inputHistory.length-1 ; i++) {
+                if(inputHistory[i] === calculatorInput.value) {
+                    calculatorInput.value = inputHistory[i+1];
+                    return;
+                }
+            }
+            calculatorInput.value = "";
+            return;
+        }
+        
+        if(event.keyCode !== 13) // enter
+            return;
+        
+        for(var i = 0 ; i < inputHistory.length ; i++) { // if command comes from history, remove it
+            if(inputHistory[i] === calculatorInput.value) {
+                inputHistory.splice(i, 1);
+                break;
+            }
+        }
+        inputHistory.push(calculatorInput.value); // add command to history
+        if(inputHistory.length > 20) // checks if size exceeded limit
+            inputHistory.shift();
+            
+        var newOutput = null; // will be place in calculatorOutput
+        
+        for(var i = 0 ; i < commands.length ; i++) { // checks if the input is a command
             if(commands[i].name === calculatorInput.value) {
                 newOutput = commands[i].action();
                 break;
             }
         }
         
-        for(var i = 0 ; i < secretCommands.length ; i++) {
+        for(var i = 0 ; i < secretCommands.length ; i++) { // ???
             if(secretCommands[i].name === calculatorInput.value) {
                 newOutput = secretCommands[i].action();
                 break;

@@ -38,9 +38,9 @@ var tokenTypes = [ // Terminal symbols
     new tokenType("!",     "!"),
     new tokenType("&",     "&"),
     new tokenType("|",     "\\|"),
+    new tokenType("?",     "\\?"),
+    new tokenType(":",     ":"),
     //new tokenType(",",     ","),
-    //new tokenType("\\?",     "?"),
-    //new tokenType(":",     ":"),
     new tokenType("err", ".*")
 ];
 
@@ -61,36 +61,41 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["EXPR2"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR2", [
-        new pattern(["EXPR2", "+", "EXPR3_R+"], function(nodes) {return nodes[0].val() + nodes[2].val();}),
-        new pattern(["EXPR2", "-", "EXPR3_R+"], function(nodes) {return nodes[0].val() - nodes[2].val();}),
+        new pattern(["B_EXPR", "?", "EXPR3", ":", "EXPR3"],
+                                                function(nodes) {return nodes[0].val() ? nodes[2].val() : nodes[4].val();}),
         new pattern(["EXPR3"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR3", [
-        new pattern(["EXPR3", "*", "EXPR4"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        new pattern(["EXPR3", "/", "EXPR4"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        new pattern(["EXPR3", "%", "EXPR4"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR3", "+", "EXPR4_R+"], function(nodes) {return nodes[0].val() + nodes[2].val();}),
+        new pattern(["EXPR3", "-", "EXPR4_R+"], function(nodes) {return nodes[0].val() - nodes[2].val();}),
         new pattern(["EXPR4"],                  function(nodes) {return nodes[0].val();})
     ]),
-    new rule("EXPR3_R+", [
-        new pattern(["EXPR3_R+", "*", "EXPR4"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
-        new pattern(["EXPR3_R+", "/", "EXPR4"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
-        new pattern(["EXPR3_R+", "%", "EXPR4"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
-        new pattern(["EXPR4_R+"],               function(nodes) {return nodes[0].val();})
-    ]),
     new rule("EXPR4", [
-        new pattern(["EXPR4", "^", "EXPR5"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR4", "*", "EXPR5"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR4", "/", "EXPR5"],    function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR4", "%", "EXPR5"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
         new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR4_R+", [
-        new pattern(["EXPR4_R+", "^", "EXPR5"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
-        new pattern(["EXPR6"],                  function(nodes) {return nodes[0].val();})
+        new pattern(["EXPR4_R+", "*", "EXPR5"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
+        new pattern(["EXPR4_R+", "/", "EXPR5"], function(nodes) {return nodes[0].val() / nodes[2].val();}),
+        new pattern(["EXPR4_R+", "%", "EXPR5"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
+        new pattern(["EXPR5_R+"],               function(nodes) {return nodes[0].val();})
     ]),
     new rule("EXPR5", [
-        new pattern(["+", "EXPR6"],             function(nodes) {return nodes[1].val();}),
-        new pattern(["-", "EXPR6"],             function(nodes) {return -nodes[1].val();}),
+        new pattern(["EXPR5", "^", "EXPR6"],    function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
         new pattern(["EXPR6"],                  function(nodes) {return nodes[0].val();})
     ]),
+    new rule("EXPR5_R+", [
+        new pattern(["EXPR5_R+", "^", "EXPR6"], function(nodes) {return Math.pow(nodes[0].val(), nodes[2].val());}),
+        new pattern(["EXPR7"],                  function(nodes) {return nodes[0].val();})
+    ]),
     new rule("EXPR6", [
+        new pattern(["+", "EXPR7"],             function(nodes) {return nodes[1].val();}),
+        new pattern(["-", "EXPR7"],             function(nodes) {return -nodes[1].val();}),
+        new pattern(["EXPR7"],                  function(nodes) {return nodes[0].val();})
+    ]),
+    new rule("EXPR7", [
         new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
         new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
         new pattern(["id"],                     function(nodes) {
@@ -124,12 +129,12 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["COMP"],                   function(nodes) {return nodes[0].val();})
     ]),
     new rule("COMP", [
-        new pattern(["EXPR2", "=", "EXPR2"],    function(nodes) {return nodes[0].val() === nodes[2].val();}),
-        new pattern(["EXPR2", "!=", "EXPR2"],   function(nodes) {return nodes[0].val() !== nodes[2].val();}),
-        new pattern(["EXPR2", ">", "EXPR2"],    function(nodes) {return nodes[0].val() > nodes[2].val();}),
-        new pattern(["EXPR2", "<", "EXPR2"],    function(nodes) {return nodes[0].val() < nodes[2].val();}),
-        new pattern(["EXPR2", ">=", "EXPR2"],   function(nodes) {return nodes[0].val() >= nodes[2].val();}),
-        new pattern(["EXPR2", "<=", "EXPR2"],   function(nodes) {return nodes[0].val() <= nodes[2].val();})
+        new pattern(["EXPR", "=", "EXPR"],      function(nodes) {return nodes[0].val() === nodes[2].val();}),
+        new pattern(["EXPR", "!=", "EXPR"],     function(nodes) {return nodes[0].val() !== nodes[2].val();}),
+        new pattern(["EXPR", ">", "EXPR"],      function(nodes) {return nodes[0].val() > nodes[2].val();}),
+        new pattern(["EXPR", "<", "EXPR"],      function(nodes) {return nodes[0].val() < nodes[2].val();}),
+        new pattern(["EXPR", ">=", "EXPR"],     function(nodes) {return nodes[0].val() >= nodes[2].val();}),
+        new pattern(["EXPR", "<=", "EXPR"],     function(nodes) {return nodes[0].val() <= nodes[2].val();})
     ]),
     new rule("ERROR", [                         // Error detection
         new pattern([],                         function(nodes) {

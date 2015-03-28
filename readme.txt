@@ -26,6 +26,8 @@ Versions
 0.2 beta
  - More error messages
  - Added memory support
+ - Added conditional expressions
+ - Added input history
 
 0.1
  - First release!
