@@ -4,3 +4,8 @@
  */
 
 @import url(common.css);
+
+#plot {
+    border:1px solid black;
+    background-color:white;
+}
