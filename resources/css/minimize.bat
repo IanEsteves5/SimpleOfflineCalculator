@@ -1,4 +1,4 @@
- ::  Simple Offline Calculator v0.2
+ ::  Simple Offline Calculator v0.3 beta
  ::  By Ian Esteves do Nascimento, 2015
  ::
  ::  This script minimizes the css files using Yui Compressor http://yui.github.io/yuicompressor/
@@ -9,3 +9,4 @@ if not exist %YUI_COMPRESSOR_JAR% exit 1
 java -jar %YUI_COMPRESSOR_JAR% common.css -o common.min.css
 java -jar %YUI_COMPRESSOR_JAR% popup.css -o popup.min.css
 java -jar %YUI_COMPRESSOR_JAR% tree.css -o tree.min.css
+java -jar %YUI_COMPRESSOR_JAR% plot.css -o plot.min.css

@@ -29,6 +29,9 @@ Suggestions are always welcome :)
 
 Versions
 
+0.3 beta
+ - Nothing yet
+
 0.2
  - More error messages
  - Added memory support

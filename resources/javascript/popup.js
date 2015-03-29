@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.2
+ *  Simple Offline Calculator v0.3 beta
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -36,8 +36,12 @@ var commands = [
         }
         return result;
     }),
+    new command("plot", function() {
+        window.open("plot.html", "Plot - Simple Offline Calculator");
+        return "Opening plot...";
+    }),
     new command("tree", function() {
-        window.open("tree.html", "Tree");
+        window.open("tree.html", "Tree - Simple Offline Calculator");
         return "Opening tree...";
     })
 ];
