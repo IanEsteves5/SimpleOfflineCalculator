@@ -1,0 +1,43 @@
+/*
+ *  Simple Offline Calculator v0.3
+ *  By Ian Esteves do Nascimento, 2015
+ */
+
+@import url(common.min.css);
+
+body {
+    padding:0px;
+}
+
+#plot {
+    background-color:white;
+    position:fixed;
+    left:0px;
+    top:0px;
+}
+
+#plotControls {
+    border-top:none;
+    border-left:none;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:0px;
+    padding:0px;
+    position:fixed;
+    left:0px;
+    top:0px;
+}
+
+input.plotFunctionInput {
+    width:300px;
+    margin:3px;
+    padding:10px;
+}
+
+button.plotControlsButton {
+    width:50px;
+    height:25px;
+    margin:3px;
+    padding:0px;
+}
+    

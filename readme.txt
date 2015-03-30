@@ -14,20 +14,22 @@ Commands
             example : x := 3+10^2
  - log : shows error log for the last calculation done
  - functions : shows available functions
- - tree : shows debug window
+ - plot : open plot window
+ - tree : open debug window
 
 Features
  - A popup browser action containing a simple calculator
  - No idle processes (no performance hit while it's not being used)
+ - Functions plotting
  - A debug page that shows the parse tree and other information
-
-Planned updates
- - More error messages
- - Graphs
 
 Suggestions are always welcome :)
 
 Versions
+
+0.3
+ - Added a page for plotting functions
+ - Added time recording on debug page
 
 0.2
  - More error messages
