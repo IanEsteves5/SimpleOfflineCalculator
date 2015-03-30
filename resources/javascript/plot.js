@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.3 beta
+ *  Simple Offline Calculator v0.3
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -204,7 +204,7 @@ window.onload = function() {
         plot.resize(window.innerWidth, window.innerHeight);
     };
     
-    document.getElementById("plot").onmousedown = function(event) {
+    document.getElementById("plot").onmousedown = function(event) { // Starts drag.
         mouseDownFlag = true;
         lastMousePos = {
             x : event.clientX,
@@ -212,7 +212,7 @@ window.onload = function() {
         };
     };
     
-    document.getElementById("plot").onmouseup = function(event) {
+    document.getElementById("plot").onmouseup = function(event) { // Ends drag.
         mouseDownFlag = false;
     };
     
