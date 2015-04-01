@@ -4,22 +4,22 @@
     "name": "Simple Offline Calculator",
     "short_name": "S.O.Calc",
     "description": "Math happens.",
-    "version": "0.3",
+    "version": "0.4",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
 
     "icons": {
-        "16": "resources/image/icon_16.png",
-        "48": "resources/image/icon_48.png",
-        "128": "resources/image/icon_128.png"
+        "16": "resources/image/icon_beta_16.png",
+        "48": "resources/image/icon_beta_48.png",
+        "128": "resources/image/icon_beta_128.png"
     },
 
     "browser_action": {
         "default_icon": {
-            "19": "resources/image/icon_19.png",
-            "38": "resources/image/icon_38.png"
+            "19": "resources/image/icon_beta_19.png",
+            "38": "resources/image/icon_beta_38.png"
         },
         "default_popup": "popup.html",
-        "default_title": "Simple Offline Calculator v0.3"
+        "default_title": "Simple Offline Calculator v0.4 beta"
     }
 }

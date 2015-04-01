@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.3
+ *  Simple Offline Calculator v0.4 beta
  *  By Ian Esteves do Nascimento, 2015
  *  
  *  Implementation of the parsing algorithms for a calculator.

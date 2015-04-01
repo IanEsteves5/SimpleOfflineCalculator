@@ -27,6 +27,9 @@ Suggestions are always welcome :)
 
 Versions
 
+0.4 beta
+ - Nothing yet
+
 0.3
  - Added a page for plotting functions
  - Added time recording on debug page
