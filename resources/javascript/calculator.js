@@ -196,12 +196,29 @@ var mathFunctions = [
                                  }),
     new mathFunction("exp", 1, function(args) {return Math.exp(args[0]);}),
     new mathFunction("ln", 1, function(args) {return Math.log(args[0]);}),
+    new mathFunction("sqrt", 1, function(args) {return Math.sqrt(args[0]);}),
     new mathFunction("round", 1, function(args) {return Math.round(args[0]);}),
     new mathFunction("floor", 1, function(args) {return Math.floor(args[0]);}),
     new mathFunction("abs", 1, function(args) {return Math.abs(args[0]);}),
     new mathFunction("sin", 1, function(args) {return Math.sin(args[0]);}),
     new mathFunction("cos", 1, function(args) {return Math.cos(args[0]);}),
     new mathFunction("tan", 1, function(args) {return Math.tan(args[0]);}),
+    new mathFunction("asin", 1, function(args) {return Math.asin(args[0]);}),
+    new mathFunction("acos", 1, function(args) {return Math.acos(args[0]);}),
+    new mathFunction("atan", 1, function(args) {return Math.atan(args[0]);}),
+    new mathFunction("fact", 1, function(args) {
+                                    if(args[0] < 1)
+                                        return 0;
+                                    var result = 1;
+                                    var counter = args[0];
+                                    while(counter >= 2) {
+                                        if(result === Number.MAX_VALUE)
+                                            break;
+                                        result *= Math.floor(counter);
+                                        counter -= 1;
+                                    }
+                                    return result;
+                                }),
     new mathFunction("random", 0, function(args) {return Math.random();}),
     new mathFunction("pi", 0, function(args) {return Math.PI;}),
     new mathFunction("e", 0, function(args) {return Math.E;})

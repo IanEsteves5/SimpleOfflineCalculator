@@ -24,7 +24,7 @@ var plot = {
         this.ymax = 10.0;
         this.xmin = this.ymin*(this.width/this.height);
         this.xmax = this.ymax*(this.width/this.height);
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.getParseTrees();
         this.drawAxes();
     },
@@ -44,7 +44,7 @@ var plot = {
         this.xmax = (this.xmax-centerx)/step+centerx;
         this.ymin = (this.ymin-centery)/step+centery;
         this.ymax = (this.ymax-centery)/step+centery;
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.drawEverything();
     },
     zoomOut : function(step) {
@@ -54,7 +54,7 @@ var plot = {
         this.xmax = (this.xmax-centerx)*step+centerx;
         this.ymin = (this.ymin-centery)*step+centery;
         this.ymax = (this.ymax-centery)*step+centery;
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.drawEverything();
     },
     drag : function(x, y) {
