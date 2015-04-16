@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.4 beta
+ *  Simple Offline Calculator v0.4
  *  By Ian Esteves do Nascimento, 2015
  *  
  *  Implementation of the parsing algorithms for a calculator.
@@ -74,10 +74,8 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["EXPR4", "*", "EXPR5"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
         new pattern(["EXPR4", "/", "EXPR5"],    function(nodes) {
                                                     var val2 = nodes[2].val();
-                                                    if(val2 === 0) {
+                                                    if(val2 === 0)
                                                         pushErrorLog("division by zero", nodes[1].pos);
-                                                        return Number.NaN;
-                                                    }
                                                     return nodes[0].val() / val2;
                                                 }),
         new pattern(["EXPR4", "%", "EXPR5"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
@@ -87,10 +85,8 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["EXPR4_R+", "*", "EXPR5"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
         new pattern(["EXPR4_R+", "/", "EXPR5"], function(nodes) {
                                                     var val2 = nodes[2].val();
-                                                    if(val2 === 0) {
+                                                    if(val2 === 0)
                                                         pushErrorLog("division by zero", nodes[1].pos);
-                                                        return Number.NaN;
-                                                    }
                                                     return nodes[0].val() / val2;
                                                 }),
         new pattern(["EXPR4_R+", "%", "EXPR5"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
