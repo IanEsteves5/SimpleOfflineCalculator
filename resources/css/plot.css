@@ -43,6 +43,11 @@ button.plotControlsButton {
 }
 
 #mousePosition {
+    border-right:none;
+    border-bottom:none;
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius:0px;
     padding:10px;
     position:fixed;
     right:0px;

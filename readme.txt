@@ -28,6 +28,7 @@ Suggestions are always welcome :)
 Versions
 
 0.4 beta
+ - Displays mouse position in the plot window
  - Changed number of points calculated when plotting functions
  - More functions
  - More error messages

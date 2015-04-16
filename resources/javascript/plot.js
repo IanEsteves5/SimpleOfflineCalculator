@@ -151,7 +151,7 @@ var plot = {
             for(var i = 0 ; i < this.functionParseTrees.length ; i++) {
                 errorLog = ""; // error log will not be used. probably.
                 var nexty = this.functionParseTrees[i].val();
-                if(y[i] === null || y === true || y===false || isNaN(y[i]) ||
+                if(nexty === null || nexty === true || nexty === false || isNaN(nexty) ||
                   ((y[i] > this.ymax || y[i] < this.ymin) && (nexty > this.ymax || nexty < this.ymin))) {
                     y[i] = nexty;
                     continue;
