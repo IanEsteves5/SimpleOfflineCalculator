@@ -1,4 +1,4 @@
- ::  Simple Offline Calculator v0.3
+ ::  Simple Offline Calculator v0.4
  ::  By Ian Esteves do Nascimento, 2015
  ::
  ::  This script renders the icon in all resolutions needed using inkscape https://inkscape.org/

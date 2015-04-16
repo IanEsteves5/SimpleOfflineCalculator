@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.3
+ *  Simple Offline Calculator v0.4
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -9,7 +9,7 @@ function getParseTreeDiv(parseTree) {
     else {
         result = "<div class='parseTreeNode'>";
         var returnedValue = parseTree.val();
-        if(returnedValue.constructor === Array)
+        if(returnedValue !== null && returnedValue.constructor === Array)
             returnedValue = "[" + returnedValue.join() + "]";
         result += parseTree.id + (parseTree.id === returnedValue ? "" : " " + returnedValue) + "<br />";
         for(var i = 0 ; i < parseTree.children.length ; i++)
@@ -49,7 +49,9 @@ window.onload = function() {
         t1 = window.performance.now();
         var parseTree = getParseTree(tokens);
         t2 = window.performance.now();
-        var result = parseTree.val();
+        var result = null;
+        if(parseTree !== null)
+            result = parseTree.val();
         t3 = window.performance.now();
         
         content = "<tr><th>id</th><th>pos</th><th>content</th></tr>";

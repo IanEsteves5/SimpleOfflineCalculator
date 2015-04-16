@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.3
+ *  Simple Offline Calculator v0.4
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -24,7 +24,7 @@ var plot = {
         this.ymax = 10.0;
         this.xmin = this.ymin*(this.width/this.height);
         this.xmax = this.ymax*(this.width/this.height);
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.getParseTrees();
         this.drawAxes();
     },
@@ -44,7 +44,7 @@ var plot = {
         this.xmax = (this.xmax-centerx)/step+centerx;
         this.ymin = (this.ymin-centery)/step+centery;
         this.ymax = (this.ymax-centery)/step+centery;
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.drawEverything();
     },
     zoomOut : function(step) {
@@ -54,7 +54,7 @@ var plot = {
         this.xmax = (this.xmax-centerx)*step+centerx;
         this.ymin = (this.ymin-centery)*step+centery;
         this.ymax = (this.ymax-centery)*step+centery;
-        this.xstep = (this.xmax-this.xmin)/1000;
+        this.xstep = (this.xmax-this.xmin)*1.1/this.width;
         this.drawEverything();
     },
     drag : function(x, y) {
@@ -80,6 +80,12 @@ var plot = {
     },
     getYPixel : function(y) {
         return this.height*(y-this.ymax)/(this.ymin-this.ymax);
+    },
+    getXCoord : function(x) { // Converts pixel coordinates into math coordinates.
+        return this.xmin+x*(this.xmax-this.xmin)/this.width;
+    },
+    getYCoord : function(y) {
+        return this.ymax+y*(this.ymin-this.ymax)/this.height;
     },
     moveToCoord : function(x, y) { // Starts a line.
         this.plotContext.moveTo(this.getXPixel(x),this.getYPixel(y));
@@ -145,7 +151,7 @@ var plot = {
             for(var i = 0 ; i < this.functionParseTrees.length ; i++) {
                 errorLog = ""; // error log will not be used. probably.
                 var nexty = this.functionParseTrees[i].val();
-                if(y[i] === null || y === true || y===false || isNaN(y[i]) ||
+                if(nexty === null || nexty === true || nexty === false || isNaN(nexty) ||
                   ((y[i] > this.ymax || y[i] < this.ymin) && (nexty > this.ymax || nexty < this.ymin))) {
                     y[i] = nexty;
                     continue;
@@ -164,8 +170,13 @@ var plot = {
     }
 };
 
+function updateMousePosDiv(x, y) {
+    mousePosDiv.innerHTML = "" + Math.floor(plot.getXCoord(event.clientX)*100)/100 + ", " + Math.floor(plot.getYCoord(event.clientY)*100)/100;
+};
+
 var mouseDownFlag = false;
 var lastMousePos = {x:0,y:0};
+var mousePosDiv = document.getElementById("mousePosition");
 
 window.onload = function() {
     
@@ -205,6 +216,7 @@ window.onload = function() {
     };
     
     document.getElementById("plot").onmousedown = function(event) { // Starts drag.
+        updateMousePosDiv(event.clientX, event.clientY);
         mouseDownFlag = true;
         lastMousePos = {
             x : event.clientX,
@@ -213,6 +225,10 @@ window.onload = function() {
     };
     
     document.getElementById("plot").onmouseup = function(event) { // Ends drag.
+        mouseDownFlag = false;
+    };
+    
+    document.getElementById("plot").onmouseout = function(event) { // Ends drag.
         mouseDownFlag = false;
     };
     
