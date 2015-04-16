@@ -73,11 +73,12 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     new rule("EXPR4", [
         new pattern(["EXPR4", "*", "EXPR5"],    function(nodes) {return nodes[0].val() * nodes[2].val();}),
         new pattern(["EXPR4", "/", "EXPR5"],    function(nodes) {
-                                                    if(nodes[2].val() === 0) {
+                                                    var val2 = nodes[2].val();
+                                                    if(val2 === 0) {
                                                         pushErrorLog("division by zero", nodes[1].pos);
                                                         return Number.NaN;
                                                     }
-                                                    return nodes[0].val() / nodes[2].val();
+                                                    return nodes[0].val() / val2;
                                                 }),
         new pattern(["EXPR4", "%", "EXPR5"],    function(nodes) {return nodes[0].val() % nodes[2].val();}),
         new pattern(["EXPR5"],                  function(nodes) {return nodes[0].val();})
@@ -85,11 +86,12 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     new rule("EXPR4_R+", [
         new pattern(["EXPR4_R+", "*", "EXPR5"], function(nodes) {return nodes[0].val() * nodes[2].val();}),
         new pattern(["EXPR4_R+", "/", "EXPR5"], function(nodes) {
-                                                    if(nodes[2].val() === 0) {
+                                                    var val2 = nodes[2].val();
+                                                    if(val2 === 0) {
                                                         pushErrorLog("division by zero", nodes[1].pos);
                                                         return Number.NaN;
                                                     }
-                                                    return nodes[0].val() / nodes[2].val();
+                                                    return nodes[0].val() / val2;
                                                 }),
         new pattern(["EXPR4_R+", "%", "EXPR5"], function(nodes) {return nodes[0].val() % nodes[2].val();}),
         new pattern(["EXPR5_R+"],               function(nodes) {return nodes[0].val();})

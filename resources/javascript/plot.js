@@ -81,6 +81,12 @@ var plot = {
     getYPixel : function(y) {
         return this.height*(y-this.ymax)/(this.ymin-this.ymax);
     },
+    getXCoord : function(x) { // Converts pixel coordinates into math coordinates.
+        return this.xmin+x*(this.xmax-this.xmin)/this.width;
+    },
+    getYCoord : function(y) {
+        return this.ymax+y*(this.ymin-this.ymax)/this.height;
+    },
     moveToCoord : function(x, y) { // Starts a line.
         this.plotContext.moveTo(this.getXPixel(x),this.getYPixel(y));
     },
@@ -164,8 +170,13 @@ var plot = {
     }
 };
 
+function updateMousePosDiv(x, y) {
+    mousePosDiv.innerHTML = "" + Math.floor(plot.getXCoord(event.clientX)*100)/100 + ", " + Math.floor(plot.getYCoord(event.clientY)*100)/100;
+};
+
 var mouseDownFlag = false;
 var lastMousePos = {x:0,y:0};
+var mousePosDiv = document.getElementById("mousePosition");
 
 window.onload = function() {
     
@@ -205,6 +216,7 @@ window.onload = function() {
     };
     
     document.getElementById("plot").onmousedown = function(event) { // Starts drag.
+        updateMousePosDiv(event.clientX, event.clientY);
         mouseDownFlag = true;
         lastMousePos = {
             x : event.clientX,
@@ -213,6 +225,10 @@ window.onload = function() {
     };
     
     document.getElementById("plot").onmouseup = function(event) { // Ends drag.
+        mouseDownFlag = false;
+    };
+    
+    document.getElementById("plot").onmouseout = function(event) { // Ends drag.
         mouseDownFlag = false;
     };
     
