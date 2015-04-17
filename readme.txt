@@ -6,6 +6,14 @@ This extension is 100% open source.
 The latest release can be found in
 https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
 
+Features
+ - A popup browser action containing a simple calculator
+ - No idle processes (no performance hit while it's not being used)
+ - Functions plotting
+ - A debug page that shows the parse tree and other information
+
+Suggestions are always welcome :)
+
 Commands
  - help : shows all commands
  - clear : clears the results screen
@@ -16,14 +24,6 @@ Commands
  - functions : shows available functions
  - plot : open plot window
  - tree : open debug window
-
-Features
- - A popup browser action containing a simple calculator
- - No idle processes (no performance hit while it's not being used)
- - Functions plotting
- - A debug page that shows the parse tree and other information
-
-Suggestions are always welcome :)
 
 Versions
 

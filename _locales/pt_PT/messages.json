@@ -1,11 +1,11 @@
 {
-    "appName": {
-        "message": "Simple Offline Calculator"
+    "extName": {
+        "message": "Calculadora Offline"
     },
-    "appShortName": {
-        "message": "S.O.C."
+    "extShortName": {
+        "message": "C.O."
     },
-    "appDesc": {
+    "extDescription": {
         "message": "Uma calculadora que resolve expressões e desenha funções."
     }
 }

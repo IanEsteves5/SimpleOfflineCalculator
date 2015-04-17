@@ -69,9 +69,16 @@ window.onload = function() {
         
         document.getElementById("errorLog").textContent = errorLog;
         
-        content = "generating tokens : " + Math.floor((t1 - t0)*1000)/1000 + "ms\n";
-        content += "generating parse tree : " + Math.floor((t2 - t1)*1000)/1000 + "ms\n";
-        content += "calculating result : " + Math.floor((t3 - t2)*1000)/1000 + "ms\n";
+        var elapsedTime;
+        content = "generating tokens : ";
+        elapsedTime = Math.floor((t1 - t0)*1000)/1000;
+        content += elapsedTime === 0 ? "<1us\n" : elapsedTime + "ms\n";
+        content += "generating parse tree : ";
+        elapsedTime = Math.floor((t2 - t1)*1000)/1000;
+        content += elapsedTime === 0 ? "<1us\n" : elapsedTime + "ms\n";
+        content += "calculating result : ";
+        elapsedTime = Math.floor((t3 - t2)*1000)/1000;
+        content += elapsedTime === 0 ? "<1us\n" : elapsedTime + "ms\n";
         document.getElementById("timings").textContent = content;
     
         document.getElementById("parseTree").innerHTML = getParseTreeDiv(parseTree);

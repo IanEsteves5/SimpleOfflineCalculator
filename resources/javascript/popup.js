@@ -69,6 +69,8 @@ window.onload = function() {
     
     calculatorInput.onkeyup = function(event) {
         if(event.keyCode === 38) { // arrow up
+            if(inputHistory.length < 1)
+                return;
             if(inputHistory[0] === calculatorInput.value)
                 return;
             for(var i = 1 ; i < inputHistory.length ; i++) {

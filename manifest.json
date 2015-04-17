@@ -1,13 +1,15 @@
 {
     "manifest_version": 2,
 
-    "name": "__MSG_appName__",
-    "short_name": "__MSG_appShortName__",
-    "description": "__MSG_appDesc__",
+    "name": "__MSG_extName__",
+    "short_name": "__MSG_extShortName__",
+    "description": "__MSG_extDescription__",
     "version": "0.5",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
+    
     "default_locale": "en",
+    "offline_enabled": true,
 
     "icons": {
         "16": "resources/image/icon_beta_16.png",
@@ -21,6 +23,6 @@
             "38": "resources/image/icon_beta_38.png"
         },
         "default_popup": "popup.html",
-        "default_title": "Simple Offline Calculator v0.5 beta"
+        "default_title": "__MSG_extName__ v0.5 beta"
     }
 }
