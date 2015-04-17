@@ -1,12 +1,13 @@
 {
     "manifest_version": 2,
 
-    "name": "Simple Offline Calculator",
-    "short_name": "S.O.Calc",
-    "description": "Math happens.",
+    "name": "__MSG_appName__",
+    "short_name": "__MSG_appShortName__",
+    "description": "__MSG_appDesc__",
     "version": "0.5",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
+    "default_locale": "en",
 
     "icons": {
         "16": "resources/image/icon_beta_16.png",

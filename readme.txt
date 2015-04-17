@@ -27,8 +27,8 @@ Suggestions are always welcome :)
 
 Versions
 
-0.5
- - Nothing yet
+0.5 beta
+ - Added localization support
 
 0.4
  - Displays mouse position in the plot window

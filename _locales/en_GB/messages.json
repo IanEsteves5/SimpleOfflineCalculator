@@ -1,0 +1,11 @@
+{
+    "appName": {
+        "message": "Simple Offline Calculator"
+    },
+    "appShortName": {
+        "message": "S.O.C."
+    },
+    "appDesc": {
+        "message": "A calculator that solves expressions and draws functions."
+    }
+}
