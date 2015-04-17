@@ -1,9 +1,9 @@
 /*
- *  Simple Offline Calculator v0.4
+ *  Simple Offline Calculator v0.5 beta
  *  By Ian Esteves do Nascimento, 2015
  */
 
-@import url(common.min.css);
+@import url(common.css);
 
 body {
     padding:0px;
