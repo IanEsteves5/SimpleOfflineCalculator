@@ -1,10 +1,10 @@
 Simple Offline Calculator
 
-The latest release can be found in
-https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
-
 A calculator extension for Google Chrome.
 This extension is 100% open source.
+
+The latest release can be found in
+https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
 
 Features
  - A simple calculator with many mathematical functions
@@ -27,7 +27,7 @@ Commands
 
 Versions
 
-0.5 beta
+0.5
  - Added localization support (portuguese, german, japanese)
  - Added context menu to popup
  - More functions
