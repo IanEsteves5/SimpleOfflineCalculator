@@ -1,0 +1,21 @@
+Uma calculadora para o seu Google Chrome.
+O código fonte desta extensão é 100% aberto.
+
+Recursos
+ - Uma calculadora com suporte a diversas funções matemáticas
+ - Uma calculadora gráfica 2D que pode exibir diversos gráficos ao mesmo tempo.
+ - Nenhum processo em background
+ - Uma página de debug com a árvore de parsing e outras informações
+
+Sugestões são sempre bem vindas :)
+
+Comandos
+ - help : mostra a lista de comandos
+ - clear : limpa a tela
+ - memory : mostra os valores guardados na memória
+            usando a memória : <nome> := <valor>
+            exemplo : x := 3+10^2
+ - log : mostra mensagens de erro da última operação
+ - functions : mostra as funções disponíveis
+ - plot : abre a calculadora gráfica
+ - tree : abre a página de debug

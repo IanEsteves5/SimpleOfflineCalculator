@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-   -  Simple Offline Calculator v0.4
+   -  Simple Offline Calculator v0.5
    -  By Ian Esteves do Nascimento, 2015
    -
    -  Created with Inkscape (http://www.inkscape.org/)
@@ -21,7 +21,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="largetitle920x680.svg">
+   sodipodi:docname="webstoreTitleLargePT.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -68,8 +68,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="746"
+     inkscape:window-width="1920"
+     inkscape:window-height="1058"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -105,27 +105,22 @@
        y="-1.4746365e-007" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:227.56625366px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-29.82122612px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.82379818;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="1010.3511"
-       y="401.93015"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:211.57754517px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-27.72599983px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.34436083;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="1022.8804"
+       y="203.21161"
        id="text4138"
        sodipodi:linespacing="125%"
        transform="scale(1.004035,0.99598122)"><tspan
          sodipodi:role="line"
          id="tspan4140"
-         x="1001.5802"
-         y="401.93015"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:227.56625366px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-8.77094841px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.82379818;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">Simple</tspan><tspan
+         x="1014.7256"
+         y="203.21161"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:211.57754517px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-8.154706px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.34436083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">Calculadora</tspan><tspan
          sodipodi:role="line"
-         x="1001.5801"
-         y="686.38794"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:227.56625366px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-8.77094841px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.82379818;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="tspan4146">Offline</tspan><tspan
-         sodipodi:role="line"
-         x="1001.5802"
-         y="970.84576"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:227.56625366px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-8.77094841px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.82379818;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="tspan4158">Calculator</tspan></text>
+         x="1014.7256"
+         y="467.68353"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:211.57754517px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-8.154706px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:6.34436083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="tspan4158">Offline</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot4150"

@@ -6,6 +6,14 @@ This extension is 100% open source.
 The latest release can be found in
 https://chrome.google.com/webstore/detail/simple-offline-calculator/hggicmogahedhllhjjhifddgcphgaggo
 
+Features
+ - A simple calculator with many mathematical functions
+ - A 2D graphing calculator that can plot multiple functions simultaneously
+ - No idle processes (no performance hit while it's not being used)
+ - A debug page that shows the parse tree and other information
+
+Suggestions are always welcome :)
+
 Commands
  - help : shows all commands
  - clear : clears the results screen
@@ -14,18 +22,15 @@ Commands
             example : x := 3+10^2
  - log : shows error log for the last calculation done
  - functions : shows available functions
- - plot : open plot window
- - tree : open debug window
-
-Features
- - A popup browser action containing a simple calculator
- - No idle processes (no performance hit while it's not being used)
- - Functions plotting
- - A debug page that shows the parse tree and other information
-
-Suggestions are always welcome :)
+ - plot : opens the graphical calculator
+ - tree : opens the debug window
 
 Versions
+
+0.5
+ - Added localization support (portuguese, german, japanese)
+ - Added context menu to popup
+ - More functions
 
 0.4
  - Displays mouse position in the plot window

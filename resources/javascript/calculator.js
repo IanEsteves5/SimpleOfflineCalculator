@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.4
+ *  Simple Offline Calculator v0.5
  *  By Ian Esteves do Nascimento, 2015
  *  
  *  Implementation of the parsing algorithms for a calculator.
@@ -217,6 +217,20 @@ var mathFunctions = [
                                           return Number.NaN;
                                       }   
                                       return Math.log(args[0]);
+                                  }),
+    new mathFunction("log2", 1,     function(args, pos) {
+                                      if(args[0] < 0) {
+                                          pushErrorLog("log of negative number", pos);
+                                          return Number.NaN;
+                                      }   
+                                      return Math.log(args[0])/Math.LN2;
+                                  }),
+    new mathFunction("log10", 1,     function(args, pos) {
+                                      if(args[0] < 0) {
+                                          pushErrorLog("log of negative number", pos);
+                                          return Number.NaN;
+                                      }   
+                                      return Math.log(args[0])/Math.LN10;
                                   }),
     new mathFunction("sqrt", 1,   function(args, pos) {return Math.sqrt(args[0]);}),
     new mathFunction("round", 1,  function(args, pos) {return Math.round(args[0]);}),

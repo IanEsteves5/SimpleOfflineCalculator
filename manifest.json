@@ -1,12 +1,19 @@
 {
     "manifest_version": 2,
 
-    "name": "Simple Offline Calculator",
-    "short_name": "S.O.Calc",
-    "description": "Math happens.",
-    "version": "0.4",
+    "name": "__MSG_extName__",
+    "short_name": "__MSG_extShortName__",
+    "description": "__MSG_extDescription__",
+    "version": "0.5",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
+    
+    "default_locale": "en",
+    "offline_enabled": true,
+    
+    "permissions": [
+        "contextMenus"
+    ],
 
     "icons": {
         "16": "resources/image/icon_16.png",
@@ -20,6 +27,6 @@
             "38": "resources/image/icon_38.png"
         },
         "default_popup": "popup.html",
-        "default_title": "Simple Offline Calculator v0.4"
+        "default_title": "__MSG_extName__ v0.5"
     }
 }

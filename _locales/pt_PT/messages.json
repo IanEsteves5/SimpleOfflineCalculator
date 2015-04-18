@@ -1,0 +1,11 @@
+{
+    "extName": {
+        "message": "Calculadora Offline"
+    },
+    "extShortName": {
+        "message": "C.O."
+    },
+    "extDescription": {
+        "message": "Uma calculadora que resolve expressões e uma calculadora gráfica que desenha funções."
+    }
+}
