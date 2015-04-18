@@ -144,10 +144,10 @@ window.onload = function() {
             contexts: ["page"],
             documentUrlPatterns: [window.location.href],
             title: commands[i].name,
-            id: commands[i].name,
+            id: "contextMenu_" + commands[i].name,
             onclick: function(info) {
                 for(var j = 0 ; j < commands.length ; j++) {
-                    if(commands[j].name === info.menuItemId) {
+                    if(info.menuItemId.indexOf(commands[j].name) > -1) {
                         addOutput(commands[j].action());
                         return;
                     }
