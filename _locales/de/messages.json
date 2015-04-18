@@ -1,0 +1,11 @@
+{
+    "extName": {
+        "message": "Offline Rechner"
+    },
+    "extShortName": {
+        "message": "O.R."
+    },
+    "extDescription": {
+        "message": "Ein Rechner und Grafikrechner."
+    }
+}

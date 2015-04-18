@@ -13,3 +13,9 @@ if not exist %INKSCAPE_EXE% exit 1
 %INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallPT.png
 %INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargePT.png
 %INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueePT.png
+%INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallDE.png
+%INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargeDE.png
+%INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueeDE.png
+%INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallJA.png
+%INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargeJA.png
+%INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueeJA.png

@@ -28,7 +28,8 @@ Commands
 Versions
 
 0.5 beta
- - Added localization support
+ - Added localization support (portuguese, german, japanese)
+ - More functions
 
 0.4
  - Displays mouse position in the plot window
