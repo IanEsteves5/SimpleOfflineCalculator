@@ -10,6 +10,10 @@
     
     "default_locale": "en",
     "offline_enabled": true,
+    
+    "permissions": [
+        "contextMenus"
+    ],
 
     "icons": {
         "16": "resources/image/icon_beta_16.png",

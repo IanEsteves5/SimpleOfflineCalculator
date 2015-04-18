@@ -59,6 +59,10 @@ function command(name, action) {
     this.action = action; // Action returns a message to the user.
 };
 
+function addOutput(str) {
+    calculatorOutput.textContent = str + (calculatorOutput.textContent === "" ? "" : "\n") + calculatorOutput.textContent;
+};
+
 window.onload = function() {
     
     var calculatorInput = document.getElementById("calculatorInput");
@@ -106,37 +110,52 @@ window.onload = function() {
         inputHistory.push(calculatorInput.value); // add command to history
         if(inputHistory.length > 20) // checks if size exceeded limit
             inputHistory.shift();
-            
-        var newOutput = null; // will be place in calculatorOutput
         
         for(var i = 0 ; i < commands.length ; i++) { // checks if the input is a command
             if(commands[i].name === calculatorInput.value) {
-                newOutput = commands[i].action();
-                break;
+                addOutput(commands[i].action());
+                return;
             }
         }
         
         for(var i = 0 ; i < secretCommands.length ; i++) { // ???
             if(secretCommands[i].name === calculatorInput.value) {
-                newOutput = secretCommands[i].action();
-                break;
+                addOutput(secretCommands[i].action());
+                return;;
             }
         }
         
-        if(newOutput === null) {
-            if(calculatorInput.value === "")
-                calculatorInput.value = "0";
-            result = calculate(calculatorInput.value);
-            if(result === null || isNaN(result)) {
-                newOutput = "ERR = " + calculatorInput.value;
-            }
-            else {
-                newOutput =  result + " = " + calculatorInput.value;
-                calculatorInput.value = result;
-            }
+        if(calculatorInput.value === "")
+            calculatorInput.value = "0";
+        result = calculate(calculatorInput.value);
+        if(result === null || isNaN(result)) {
+            addOutput("ERR = " + calculatorInput.value);
+            return;
         }
-        
-        calculatorOutput.textContent = newOutput + (calculatorOutput.textContent === "" ? "" : "\n") + calculatorOutput.textContent;
+        addOutput(result + " = " + calculatorInput.value);
+        calculatorInput.value = result;
     };
+    
+    // Context menu
+    
+    chrome.contextMenus.removeAll();
+    for(var i = 0 ; i < commands.length ; i++) {
+        chrome.contextMenus.create({
+            contexts: ["page"],
+            documentUrlPatterns: [window.location.href],
+            title: commands[i].name,
+            id: commands[i].name,
+            onclick: function(info) {
+                for(var j = 0 ; j < commands.length ; j++) {
+                    if(commands[j].name === info.menuItemId) {
+                        addOutput(commands[j].action());
+                        return;
+                    }
+                }
+            }
+        });
+    }
+    
+    
     
 };

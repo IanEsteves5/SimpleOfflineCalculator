@@ -29,6 +29,7 @@ Versions
 
 0.5 beta
  - Added localization support (portuguese, german, japanese)
+ - Added context menu to popup
  - More functions
 
 0.4
