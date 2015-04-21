@@ -7,15 +7,6 @@
 
 set INKSCAPE_EXE="C:\Program Files\Inkscape\inkscape.exe"
 if not exist %INKSCAPE_EXE% exit 1
-%INKSCAPE_EXE% -f webstoreTitleSmallEN.svg -w 440 -h 280 -e webstoreTitleSmallEN.png
-%INKSCAPE_EXE% -f webstoreTitleLargeEN.svg -w 920 -h 680 -e webstoreTitleLargeEN.png
-%INKSCAPE_EXE% -f webstoreMarqueeEN.svg -w 1400 -h 560 -e webstoreMarqueeEN.png
-%INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallPT.png
-%INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargePT.png
-%INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueePT.png
-%INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallDE.png
-%INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargeDE.png
-%INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueeDE.png
-%INKSCAPE_EXE% -f webstoreTitleSmallPT.svg -w 440 -h 280 -e webstoreTitleSmallJA.png
-%INKSCAPE_EXE% -f webstoreTitleLargePT.svg -w 920 -h 680 -e webstoreTitleLargeJA.png
-%INKSCAPE_EXE% -f webstoreMarqueePT.svg -w 1400 -h 560 -e webstoreMarqueeJA.png
+%INKSCAPE_EXE% -f webstoreTileSmall.svg -w 440 -h 280 -e webstoreTileSmall.png
+%INKSCAPE_EXE% -f webstoreTileLarge.svg -w 920 -h 680 -e webstoreTileLarge.png
+%INKSCAPE_EXE% -f webstoreMarquee.svg -w 1400 -h 560 -e webstoreMarquee.png

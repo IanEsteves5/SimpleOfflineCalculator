@@ -155,7 +155,4 @@ window.onload = function() {
             }
         });
     }
-    
-    
-    
 };
