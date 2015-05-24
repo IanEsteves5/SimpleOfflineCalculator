@@ -27,6 +27,9 @@ Commands
 
 Versions
 
+0.6 beta
+ - Nothing yet
+
 0.5
  - Added localization support (portuguese, german, japanese)
  - Added context menu to popup
