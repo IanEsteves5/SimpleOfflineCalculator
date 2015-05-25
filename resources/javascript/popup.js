@@ -134,6 +134,7 @@ window.onload = function() {
         }
         addOutput(result + " = " + calculatorInput.value);
         calculatorInput.value = result;
+        memory.set("ans", result);
     };
     
     // Context menu

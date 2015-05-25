@@ -52,11 +52,7 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
     ]),
     new rule("EXPR", [                          // Numeric expressions
         new pattern(["id", ":=", "EXPR2"],      function(nodes) {
-                                                    for(var i = 0 ; i < memory.length ; i++)
-                                                        if(memory[i].id === nodes[0].val())
-                                                            return memory[i].val = nodes[2].val();
-                                                    memory.push(new memoryEntry(nodes[0].val(), nodes[2].val()));
-                                                    return memory[memory.length-1].val;
+                                                    return memory.set(nodes[0].val(), nodes[2].val());
                                                 }),
         new pattern(["EXPR2"],                  function(nodes) {return nodes[0].val();})
     ]),
@@ -135,9 +131,9 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
         new pattern(["(", "EXPR", ")"],         function(nodes) {return nodes[1].val();}),
         new pattern(["NUM"],                    function(nodes) {return nodes[0].val();}),
         new pattern(["id"],                     function(nodes) {
-                                                    for(var i = 0 ; i < memory.length ; i++)
-                                                        if(memory[i].id === nodes[0].val())
-                                                            return memory[i].val;
+                                                    var n = memory.get(nodes[0].val());
+                                                    if(n !== null)
+                                                        return n;
                                                     pushErrorLog("undefined variable " + nodes[0].val(), nodes[0].pos);
                                                     return Number.NaN;
                                                 })
@@ -271,6 +267,25 @@ var mathFunctions = [
 ];
 
 var memory = [];
+
+memory.set = function(id, val) {
+    for(var i = 0 ; i < this.length ; i++)
+        if(this[i].id === id)
+            return this[i].val = val;
+    this.push(new memoryEntry(id, val));
+    return val;
+};
+
+memory.get = function(id) {
+    for(var i = 0 ; i < this.length ; i++)
+        if(this[i].id === id)
+            return this[i].val;
+    return null;
+};
+
+memory.empty = function() {
+    this.length = 0;
+};
 
 var errorLog = "";
 
