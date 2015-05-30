@@ -29,6 +29,8 @@ Versions
 
 0.6 beta
  - Automatically adds last result to memory
+ - Function arguments now have different names
+ - More functions
 
 0.5
  - Added localization support (portuguese, german, japanese)

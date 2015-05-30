@@ -31,7 +31,7 @@ var commands = [
         for(var i = 0 ; i < mathFunctions.length ; i++) {
             result += (i === 0 ? "" : "\n") + mathFunctions[i].id + "(";
             for(var j = 0 ; j < mathFunctions[i].numArgs ; j++)
-                result += (j === 0 ? "" : ",") + "x" + (mathFunctions[i].numArgs === 1 ? "" : j+1);
+                result += (j === 0 ? "" : ",") + mathFunctions[i].argNames[j];//"x" + (mathFunctions[i].numArgs === 1 ? "" : j+1);
             result += ")";
         }
         return result;

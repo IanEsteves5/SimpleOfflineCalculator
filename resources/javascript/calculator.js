@@ -195,75 +195,95 @@ var rules = [ // Non terminal symbols. Patterns are evaluated right to left
 ];
 
 var mathFunctions = [
-    new mathFunction("log", 2,    function(args, pos) {
-                                      if(args[0] < 0) {
-                                          pushErrorLog("log of negative number", pos);
-                                          return Number.NaN;
-                                      }  
-                                      return Math.log(args[0])/Math.log(args[1]);
-                                  }),
-    new mathFunction("trunc", 2,  function(args, pos) {
-                                      var offset = Math.pow(10, Math.floor(args[1]));
-                                      return Math.floor(args[0]*offset)/offset;
-                                  }),
-    new mathFunction("exp", 1,    function(args, pos) {return Math.exp(args[0]);}),
-    new mathFunction("ln", 1,     function(args, pos) {
-                                      if(args[0] < 0) {
-                                          pushErrorLog("log of negative number", pos);
-                                          return Number.NaN;
-                                      }   
-                                      return Math.log(args[0]);
-                                  }),
-    new mathFunction("log2", 1,     function(args, pos) {
-                                      if(args[0] < 0) {
-                                          pushErrorLog("log of negative number", pos);
-                                          return Number.NaN;
-                                      }   
-                                      return Math.log(args[0])/Math.LN2;
-                                  }),
-    new mathFunction("log10", 1,     function(args, pos) {
-                                      if(args[0] < 0) {
-                                          pushErrorLog("log of negative number", pos);
-                                          return Number.NaN;
-                                      }   
-                                      return Math.log(args[0])/Math.LN10;
-                                  }),
-    new mathFunction("sqrt", 1,   function(args, pos) {return Math.sqrt(args[0]);}),
-    new mathFunction("round", 1,  function(args, pos) {return Math.round(args[0]);}),
-    new mathFunction("floor", 1,  function(args, pos) {return Math.floor(args[0]);}),
-    new mathFunction("abs", 1,    function(args, pos) {return Math.abs(args[0]);}),
-    new mathFunction("sin", 1,    function(args, pos) {return Math.sin(args[0]);}),
-    new mathFunction("cos", 1,    function(args, pos) {return Math.cos(args[0]);}),
-    new mathFunction("tan", 1,    function(args, pos) {return Math.tan(args[0]);}),
-    new mathFunction("asin", 1,   function(args, pos) {
-                                      if(args[0] > 1 || args[0] < -1) {
-                                          pushErrorLog("invalid argument for asin " + args[0], pos);
-                                          return Number.NaN;
-                                      }
-                                      return Math.asin(args[0]);
-                                  }),
-    new mathFunction("acos", 1,   function(args, pos) {
-                                      if(args[0] > 1 || args[0] < -1) {
-                                          pushErrorLog("invalid argument for acos " + args[0], pos);
-                                          return Number.NaN;
-                                      }
-                                      return Math.acos(args[0]);
-                                  }),
-    new mathFunction("atan", 1,   function(args, pos) {return Math.atan(args[0]);}),
-    new mathFunction("fact", 1,   function(args, pos) {
-                                      if(args[0] < 1)
-                                          return 0;
-                                      var result = 1;
-                                      for(var i = Math.floor(args[0]) ; i > 1 ; i--) {
-                                          if(result === Number.POSITIVE_INFINITY)
-                                              break;
-                                          result *= i;
-                                      }
-                                      return result;
-                                  }),
-    new mathFunction("random", 0, function(args, pos) {return Math.random();}),
-    new mathFunction("pi", 0,     function(args, pos) {return Math.PI;}),
-    new mathFunction("e", 0,      function(args, pos) {return Math.E;})
+    new mathFunction("log",   ["x", "b"], function(args, pos) {
+                                              if(args[0] < 0) {
+                                                  pushErrorLog("log of negative number", pos);
+                                                  return Number.NaN;
+                                              }  
+                                              return Math.log(args[0])/Math.log(args[1]);
+                                          }),
+    new mathFunction("trunc", ["x", "n"], function(args, pos) {
+                                              var offset = Math.pow(10, Math.floor(args[1]));
+                                              return Math.floor(args[0]*offset)/offset;
+                                          }),
+    new mathFunction("rad",   ["x", "y"], function(args, pos) {return Math.sqrt(args[0]*args[0]+args[1]*args[1]);}),
+    new mathFunction("ang",   ["x", "y"], function(args, pos) {return Math.atan(args[1]/args[0]);}),
+    new mathFunction("exp",   ["x"],      function(args, pos) {return Math.exp(args[0]);}),
+    new mathFunction("ln",    ["x"],      function(args, pos) {
+                                              if(args[0] < 0) {
+                                                  pushErrorLog("log of negative number", pos);
+                                                  return Number.NaN;
+                                              }   
+                                              return Math.log(args[0]);
+                                          }),
+    new mathFunction("log2",  ["x"],      function(args, pos) {
+                                              if(args[0] < 0) {
+                                                  pushErrorLog("log of negative number", pos);
+                                                  return Number.NaN;
+                                              }   
+                                              return Math.log(args[0])/Math.LN2;
+                                          }),
+    new mathFunction("log10", ["x"],      function(args, pos) {
+                                              if(args[0] < 0) {
+                                                  pushErrorLog("log of negative number", pos);
+                                                  return Number.NaN;
+                                              }   
+                                              return Math.log(args[0])/Math.LN10;
+                                          }),
+    new mathFunction("sqrt",  ["x"],      function(args, pos) {return Math.sqrt(args[0]);}),
+    new mathFunction("round", ["x"],      function(args, pos) {return Math.round(args[0]);}),
+    new mathFunction("floor", ["x"],      function(args, pos) {return Math.floor(args[0]);}),
+    new mathFunction("abs",   ["x"],      function(args, pos) {return Math.abs(args[0]);}),
+    new mathFunction("sin",   ["x"],      function(args, pos) {return Math.sin(args[0]);}),
+    new mathFunction("cos",   ["x"],      function(args, pos) {return Math.cos(args[0]);}),
+    new mathFunction("tan",   ["x"],      function(args, pos) {return Math.tan(args[0]);}),
+    new mathFunction("asin",  ["x"],      function(args, pos) {
+                                              if(args[0] > 1 || args[0] < -1) {
+                                                  pushErrorLog("invalid argument for asin " + args[0], pos);
+                                                  return Number.NaN;
+                                              }
+                                              return Math.asin(args[0]);
+                                          }),
+    new mathFunction("acos",  ["x"],      function(args, pos) {
+                                              if(args[0] > 1 || args[0] < -1) {
+                                                  pushErrorLog("invalid argument for acos " + args[0], pos);
+                                                  return Number.NaN;
+                                              }
+                                              return Math.acos(args[0]);
+                                          }),
+    new mathFunction("atan",  ["x"],      function(args, pos) {return Math.atan(args[0]);}),
+    new mathFunction("sinh",  ["x"],      function(args, pos) {return Math.sinh(args[0]);}),
+    new mathFunction("cosh",  ["x"],      function(args, pos) {return Math.cosh(args[0]);}),
+    new mathFunction("tanh",  ["x"],      function(args, pos) {return Math.tanh(args[0]);}),
+    new mathFunction("asinh", ["x"],      function(args, pos) {return Math.asinh(args[0]);}),
+    new mathFunction("acosh", ["x"],      function(args, pos) {
+                                              if(args[0] < 1) {
+                                                  pushErrorLog("invalid argument for acosh " + args[0], pos);
+                                                  return Number.NaN;
+                                              }
+                                              return Math.acosh(args[0]);
+                                          }),
+    new mathFunction("atanh", ["x"],      function(args, pos) {
+                                              if(args[0] > 1 || args[0] < -1) {
+                                                  pushErrorLog("invalid argument for atanh " + args[0], pos);
+                                                  return Number.NaN;
+                                              }
+                                              return Math.atanh(args[0]);
+                                          }),
+    new mathFunction("fact",  ["n"],      function(args, pos) {
+                                              if(args[0] < 1)
+                                                  return 0;
+                                              var result = 1;
+                                              for(var i = Math.floor(args[0]) ; i > 1 ; i--) {
+                                                  if(result === Number.POSITIVE_INFINITY)
+                                                      break;
+                                                  result *= i;
+                                              }
+                                              return result;
+                                          }),
+    new mathFunction("random",[],         function(args, pos) {return Math.random();}),
+    new mathFunction("pi",    [],         function(args, pos) {return Math.PI;}),
+    new mathFunction("e",     [],         function(args, pos) {return Math.E;})
 ];
 
 var memory = [];
@@ -445,9 +465,10 @@ function parseTreeTerminalNode(token) {
     this.tokensUsed = function() {return 1;};
 };
 
-function mathFunction(id, numArgs, func) {
+function mathFunction(id, argNames, func) {
     this.id = id;
-    this.numArgs = numArgs;
+    this.argNames = argNames;
+    this.numArgs = argNames.length;
     this.action = function(args, pos) {return func(args, pos);};
 };
 
