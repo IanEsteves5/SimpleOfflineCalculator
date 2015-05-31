@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.5
+ *  Simple Offline Calculator v0.6
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -42,7 +42,7 @@ window.onload = function() {
         var content = "";
         var t0, t1, t2, t3;
         errorLog = "";
-        memory = [];
+        memory.empty();
         
         t0 = window.performance.now();
         var tokens = getTokens(inputString);

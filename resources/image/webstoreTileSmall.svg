@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-   -  Simple Offline Calculator v0.5
+   -  Simple Offline Calculator v0.6
    -  By Ian Esteves do Nascimento, 2015
    -
    -  Created with Inkscape (http://www.inkscape.org/)
@@ -15,13 +15,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1400"
+   width="880"
    height="560"
    viewBox="0 0 744.09449 1052.3622"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="webstoreMarqueeJA.svg">
+   sodipodi:docname="smalltitle440x280.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -54,13 +54,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="433.50541"
+     inkscape:cx="176.80888"
      inkscape:cy="280.75029"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1058"
+     inkscape:window-width="1366"
+     inkscape:window-height="746"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -90,32 +90,37 @@
     <rect
        style="fill:#007aa0;fill-opacity:1;stroke:none;stroke-width:75.16872406;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4144"
-       width="2630.9053"
+       width="1653.7119"
        height="1052.3622"
-       x="-943.40546"
+       x="-454.80875"
        y="-1.4555697e-005" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:430.61331177px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-56.42935181px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:1.87921813;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="1603.441"
-       y="405.19562"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:266.69656372px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-34.9490242px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:7.99715853;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="1126.4469"
+       y="274.02786"
        id="text4138"
        sodipodi:linespacing="125%"
        transform="scale(1.004035,0.99598122)"><tspan
          sodipodi:role="line"
-         x="1586.8442"
-         y="405.19562"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:430.61331177px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-16.59686852px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:1.87921813;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="tspan4158">オフライン</tspan><tspan
+         id="tspan4140"
+         x="1116.1677"
+         y="274.02786"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:266.69656372px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-10.27912426px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:7.99715853;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">Simple</tspan><tspan
          sodipodi:role="line"
-         x="1586.8442"
-         y="943.46228"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:430.61331177px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-16.59686852px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:1.87921813;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="tspan3352">電卓</tspan></text>
+         x="1116.1677"
+         y="607.39856"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:266.69656372px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-10.27912426px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:7.99715853;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="tspan4146">Offline</tspan><tspan
+         sodipodi:role="line"
+         x="1116.1677"
+         y="940.76929"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:266.69656372px;line-height:125%;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';text-align:end;letter-spacing:-10.27912426px;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:end;fill:#e1f7ff;fill-opacity:1;stroke:#e1f7ff;stroke-width:7.99715853;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="tspan4158">Calculator</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot4150"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
          id="flowRegion4152"><rect
            id="rect4154"
            width="44.446712"

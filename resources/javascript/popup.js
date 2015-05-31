@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.5
+ *  Simple Offline Calculator v0.6
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -31,7 +31,7 @@ var commands = [
         for(var i = 0 ; i < mathFunctions.length ; i++) {
             result += (i === 0 ? "" : "\n") + mathFunctions[i].id + "(";
             for(var j = 0 ; j < mathFunctions[i].numArgs ; j++)
-                result += (j === 0 ? "" : ",") + "x" + (mathFunctions[i].numArgs === 1 ? "" : j+1);
+                result += (j === 0 ? "" : ",") + mathFunctions[i].argNames[j];//"x" + (mathFunctions[i].numArgs === 1 ? "" : j+1);
             result += ")";
         }
         return result;
@@ -134,6 +134,7 @@ window.onload = function() {
         }
         addOutput(result + " = " + calculatorInput.value);
         calculatorInput.value = result;
+        memory.set("ans", result);
     };
     
     // Context menu
@@ -155,7 +156,4 @@ window.onload = function() {
             }
         });
     }
-    
-    
-    
 };

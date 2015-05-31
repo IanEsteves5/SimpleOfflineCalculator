@@ -1,5 +1,5 @@
 /*
- *  Simple Offline Calculator v0.5
+ *  Simple Offline Calculator v0.6
  *  By Ian Esteves do Nascimento, 2015
  */
 
@@ -137,7 +137,7 @@ var plot = {
     },
     drawFunctions : function() {
         var x = new memoryEntry("x", this.xmin);
-        memory = [];
+        memory.empty();
         memory.push(x);
         var y = [];
         for(var i = 0 ; i < this.functionParseTrees.length ; i++)
