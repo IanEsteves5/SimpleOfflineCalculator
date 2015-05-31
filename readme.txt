@@ -27,7 +27,7 @@ Commands
 
 Versions
 
-0.6 beta
+0.6
  - Automatically adds last result to memory
  - Function arguments now have different names
  - More functions
