@@ -1,6 +1,6 @@
 /*
  *  Simple Offline Calculator v0.6
- *  By Ian Esteves do Nascimento, 2015
+ *  By Ian Esteves do Nascimento, 2015-2016
  */
 
 @import url("common.min.css");
@@ -22,5 +22,5 @@ body {
     height:333px;
     margin:0px;
     resize:none;
-    white-space:nowrap;
+    white-space:pre;
 }
