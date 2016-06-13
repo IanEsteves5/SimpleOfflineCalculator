@@ -4,7 +4,7 @@
     "name": "__MSG_extName__",
     "short_name": "__MSG_extShortName__",
     "description": "__MSG_extDescription__",
-    "version": "0.6",
+    "version": "0.6.0.1",
     "author": "Ian Esteves do Nascimento",
     "homepage_url": "https://github.com/IanEsteves5/SimpleOfflineCalculator",
     
