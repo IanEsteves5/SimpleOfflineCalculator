@@ -1,6 +1,6 @@
 /*
  *  Simple Offline Calculator v0.6
- *  By Ian Esteves do Nascimento, 2015
+ *  By Ian Esteves do Nascimento, 2015-2016
  *  
  *  Implementation of the parsing algorithms for a calculator.
  *  
@@ -199,12 +199,22 @@ var mathFunctions = [
                                               if(args[0] < 0) {
                                                   pushErrorLog("log of negative number", pos);
                                                   return Number.NaN;
-                                              }  
+                                              }
                                               return Math.log(args[0])/Math.log(args[1]);
                                           }),
     new mathFunction("trunc", ["x", "n"], function(args, pos) {
-                                              var offset = Math.pow(10, Math.floor(args[1]));
-                                              return Math.floor(args[0]*offset)/offset;
+                                              if(args[1] < 0) {
+                                                  pushErrorLog("trunc with negative decimal places", pos);
+                                                  return Number.NaN;
+                                              }
+                                              if(args[1] < 1)
+                                                  return Math.floor(args[0]);
+                                              try {
+                                                  return parseFloat(args[0].toFixed(Math.floor(args[1])));
+                                              }
+                                              catch(e) {
+                                                  return args[0];
+                                              }
                                           }),
     new mathFunction("rad",   ["x", "y"], function(args, pos) {return Math.sqrt(args[0]*args[0]+args[1]*args[1]);}),
     new mathFunction("ang",   ["x", "y"], function(args, pos) {return Math.atan(args[1]/args[0]);}),

@@ -1,6 +1,6 @@
 /*
  *  Simple Offline Calculator v0.6
- *  By Ian Esteves do Nascimento, 2015
+ *  By Ian Esteves do Nascimento, 2015-2016
  */
 
 var plot = {
@@ -87,6 +87,9 @@ var plot = {
     getYCoord : function(y) {
         return this.ymax+y*(this.ymin-this.ymax)/this.height;
     },
+    getScale : function() {
+       return Math.round(Math.log((this.ymax-this.ymin)/10)/Math.LN10);
+    },
     moveToCoord : function(x, y) { // Starts a line.
         this.plotContext.moveTo(this.getXPixel(x),this.getYPixel(y));
     },
@@ -97,41 +100,40 @@ var plot = {
         this.plotCanvas.height = this.plotCanvas.height; // This is not a mistake.
     },
     drawAxes : function () {
-        var scale = Math.round(Math.log((this.ymax-this.ymin)/10)/Math.LN10);
-        var scaledStep;
-        if(scale > 0)
-            scaledStep = Math.pow(10, scale);
-        else
-            scaledStep = 1;
+        var scale = this.getScale();
+        var scaledStep = Math.pow(10, scale);
         this.plotContext.beginPath();
         this.plotContext.strokeStyle = "#AAAAAA";
         this.plotContext.fillStyle = "#AAAAAA";
         this.plotContext.font = "normal 12px Courier new";
-        this.moveToCoord(0, this.ymin);
-        this.lineToCoord(0, this.ymax);
-        this.moveToCoord(this.xmin, 0);
-        this.lineToCoord(this.xmax, 0);
+        
         this.plotContext.textAlign = "center";
         this.plotContext.textBaseline = "top";
+        this.moveToCoord(0, this.ymin);
+        this.lineToCoord(0, this.ymax);
         for(var x = Math.ceil(this.xmin/scaledStep)*scaledStep ; x <= this.xmax ; x+=scaledStep) {
             if(Math.abs(x) < scaledStep/10)
                 continue;
             this.plotContext.moveTo(this.getXPixel(x),this.getYPixel(0)-5);
             this.plotContext.lineTo(this.getXPixel(x),this.getYPixel(0)+5);
-            this.plotContext.fillText(x,
-                                      //(x >= 0 ? "" : "-") + "." + Math.floor(Math.pow(10, -scale)*(Math.abs(x)-Math.floor(Math.abs(x)))),
-                                      this.getXPixel(x),this.getYPixel(0)+7);
+            this.plotContext.fillText(scale >= 0 ? x : Math.round(x/scaledStep) + "e" + scale,
+                                      this.getXPixel(x),
+                                      Math.min(Math.max(0, this.getYPixel(0)+7), this.height-14));
         }
+        
         this.plotContext.textAlign = "right";
         this.plotContext.textBaseline = "middle";
+        this.moveToCoord(this.xmin, 0);
+        this.lineToCoord(this.xmax, 0);
         for(var y = Math.ceil(this.ymin/scaledStep)*scaledStep ; y <= this.ymax ; y+=scaledStep) {
-            if(y === 0)
+            if(Math.abs(y) < scaledStep/10)
                 continue;
             this.plotContext.moveTo(this.getXPixel(0)-5,this.getYPixel(y));
             this.plotContext.lineTo(this.getXPixel(0)+5,this.getYPixel(y));
-            this.plotContext.fillText(y,
-                                      //(y >= 0 ? "" : "-") + "." + Math.floor(Math.pow(10, -scale)*(Math.abs(y)-Math.floor(Math.abs(y)))),
-                                      this.getXPixel(0)-7,this.getYPixel(y));
+            var yText = scale >= 0 ? y + "" : Math.round(y/scaledStep) + "e" + scale;
+            this.plotContext.fillText(yText,
+                                      Math.min(Math.max(7*yText.length, this.getXPixel(0)-7), this.width-1),
+                                      this.getYPixel(y));
         }
         this.plotContext.stroke();
     },
@@ -171,7 +173,13 @@ var plot = {
 };
 
 function updateMousePosDiv(x, y) {
-    mousePosDiv.innerHTML = "" + Math.floor(plot.getXCoord(event.clientX)*100)/100 + ", " + Math.floor(plot.getYCoord(event.clientY)*100)/100;
+    var scale = plot.getScale();
+    if(scale >= 0)
+        mousePosDiv.innerHTML = plot.getXCoord(event.clientX).toFixed(2) + ", " +
+                                plot.getYCoord(event.clientY).toFixed(2);
+    else
+        mousePosDiv.innerHTML = (plot.getXCoord(event.clientX)/Math.pow(10, scale)).toFixed(2) + "e" + scale + ", " +
+                                (plot.getYCoord(event.clientY)/Math.pow(10, scale)).toFixed(2) + "e" + scale;
 };
 
 var mouseDownFlag = false;
