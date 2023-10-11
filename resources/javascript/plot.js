@@ -32,8 +32,9 @@ var plot = {
         this.functionParseTrees = [];
         for (var i = 0; i < this.numberOfFunctions; i++) {
             var newParseTree = getParseTree(getTokens(document.getElementById("plotFunction" + i).value));
-            if (newParseTree === null)
+            if (newParseTree === null) {
                 continue;
+            }
             this.functionParseTrees.push(newParseTree);
         }
     },
@@ -112,8 +113,7 @@ var plot = {
         this.moveToCoord(0, this.ymin);
         this.lineToCoord(0, this.ymax);
         for (var x = Math.ceil(this.xmin / scaledStep) * scaledStep; x <= this.xmax; x += scaledStep) {
-            if (Math.abs(x) < scaledStep / 10)
-                continue;
+            if (Math.abs(x) < scaledStep / 10) { continue; }
             this.plotContext.moveTo(this.getXPixel(x), this.getYPixel(0) - 5);
             this.plotContext.lineTo(this.getXPixel(x), this.getYPixel(0) + 5);
             this.plotContext.fillText(scale >= 0 ? x : Math.round(x / scaledStep) + "e" + scale,
@@ -126,8 +126,7 @@ var plot = {
         this.moveToCoord(this.xmin, 0);
         this.lineToCoord(this.xmax, 0);
         for (var y = Math.ceil(this.ymin / scaledStep) * scaledStep; y <= this.ymax; y += scaledStep) {
-            if (Math.abs(y) < scaledStep / 10)
-                continue;
+            if (Math.abs(y) < scaledStep / 10) { continue; }
             this.plotContext.moveTo(this.getXPixel(0) - 5, this.getYPixel(y));
             this.plotContext.lineTo(this.getXPixel(0) + 5, this.getYPixel(y));
             var yText = scale >= 0 ? y + "" : Math.round(y / scaledStep) + "e" + scale;
@@ -138,6 +137,8 @@ var plot = {
         this.plotContext.stroke();
     },
     drawFunctions: function () {
+        var colors = ["#FF0000", "#00FF00", "#0000FF", "#FF00FF", "#00FFFF"]; // Add more colors as needed
+
         var x = new memoryEntry("x", this.xmin);
         memory.empty();
         memory.push(x);
@@ -145,7 +146,7 @@ var plot = {
         for (var i = 0; i < this.functionParseTrees.length; i++) { y.push(this.functionParseTrees[i].val()); }
 
         this.plotContext.beginPath();
-        this.plotContext.strokeStyle = "#000000";
+        this.plotContext.strokeStyle = colors[i % colors.length]; // Use a different color for each function
         while (x.val < this.xmax) {
             var xPrev = x.val;
             x.val += this.xstep;
@@ -168,6 +169,7 @@ var plot = {
         this.clear();
         this.drawAxes();
         this.drawFunctions();
+        this.plotContext.strokeStyle = "#000000"; // Reset the stroke style to black
     }
 };
 
@@ -239,8 +241,7 @@ window.onload = function () {
     };
 
     document.getElementById("plot").onmousemove = function (event) {
-        if (!mouseDownFlag)
-            return;
+        if (!mouseDownFlag) { return; }
         plot.drag(event.clientX - lastMousePos.x, event.clientY - lastMousePos.y);
         lastMousePos = {
             x: event.clientX,
