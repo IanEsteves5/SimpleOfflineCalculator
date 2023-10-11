@@ -7,7 +7,7 @@ var commands = [
     new command("help", function() {
         var result = "Commands :";
         for(var i = 0 ; i < commands.length ; i++)
-            result += "\n" + commands[i].name;
+         {   result += "\n" + commands[i].name;}
         return result;
     }),
     new command("clear", function() {
@@ -17,10 +17,10 @@ var commands = [
     }),
     new command("memory", function() {
         if(memory.length === 0)
-            return "Empty";
+           { return "Empty";}
         var result = memory[0].id + " = " + memory[0].val;
         for(var i = 1 ; i < memory.length ; i++)
-            result += "\n" + memory[i].id + " = " + memory[i].val;
+           { result += "\n" + memory[i].id + " = " + memory[i].val;}
         return result;
     }),
     new command("log", function() {
@@ -74,9 +74,9 @@ window.onload = function() {
     calculatorInput.onkeyup = function(event) {
         if(event.keyCode === 38) { // arrow up
             if(inputHistory.length < 1)
-                return;
+              {  return;}
             if(inputHistory[0] === calculatorInput.value)
-                return;
+              {  return;}
             for(var i = 1 ; i < inputHistory.length ; i++) {
                 if(inputHistory[i] === calculatorInput.value) {
                     calculatorInput.value = inputHistory[i-1];
@@ -109,7 +109,7 @@ window.onload = function() {
         }
         inputHistory.push(calculatorInput.value); // add command to history
         if(inputHistory.length > 20) // checks if size exceeded limit
-            inputHistory.shift();
+           { inputHistory.shift();}
         
         for(var i = 0 ; i < commands.length ; i++) { // checks if the input is a command
             if(commands[i].name === calculatorInput.value) {

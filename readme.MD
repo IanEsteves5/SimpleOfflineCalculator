@@ -12,6 +12,7 @@ Features
  - No idle processes (no performance hit while it's not being used)
  - A debug page that shows the parse tree and other information
 
+
 Suggestions are always welcome :)
 
 Commands
@@ -24,6 +25,14 @@ Commands
  - functions : shows available functions
  - plot : opens the graphical calculator
  - tree : opens the debug window
+
+
+Useful Functions:
+
+ - If you want a calculation with "e", use e(), "pi" use pi(), You can type "sin(pi())" and you will get an answer in degrees
+ - For logarithms, if you want base 10 and argument of 3, you can type log10(3) which is equivelent to log(3,10). For base 2, you can type log2(3) or log(3,2)
+ - For powers, type 2^3 to get 2 raised to the 3rd power
+
 
 Versions
 
